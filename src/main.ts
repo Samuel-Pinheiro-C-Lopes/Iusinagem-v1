@@ -4,6 +4,7 @@ import 'zone.js';
 
 import { AppMainComponent } from './main/main.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @Component({
   selector: 'app-root',
@@ -18,4 +19,6 @@ export class App {
   name = 'Angular';
 }
 
-bootstrapApplication(App);
+bootstrapApplication(App, {
+  providers: [provideAnimationsAsync()]
+});
