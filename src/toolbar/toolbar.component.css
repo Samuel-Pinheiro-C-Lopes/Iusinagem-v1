@@ -1,0 +1,63 @@
+/*
+Style for all the toolbars present in this component, since all of them will receive this class
+*/
+.toolbar {
+    color: white;
+}
+
+/*
+Styles for the top toolbar
+Background defines the style set for the background of the element, defining it's 'linear-gradient', wich is determining that the color starts in the top 
+- with the 180 deg notation - and its a rgb(1, 120, 1), changing gradually until it get's in the bottom with the rgb(1, 150, 1) color - a little lighter.
+Height is defining the element's height in pixels
+Padding-top sets the distance between it's content and the top border
+Justify-content as 'center' is centering the child elements of the class
+*/
+.toolbar.t1 {
+    background: linear-gradient(180deg, rgb(1, 120, 1), rgb(1, 150, 1) ) ;
+    height: 70px;
+    padding: 40px 0 20px 0;
+    justify-content: center;
+
+}
+
+/*
+Style for the second toolbar
+Background is defining it's linear-gradient, starting in the top with the bottom rgb of the toolbar above and changing it gradually to rgb (1,180)
+Height is being defined in pixels
+padding bottom determines the distance between the bottom border of the element and it's content - making that it has a gap
+*/
+.toolbar.t2 {
+    background: linear-gradient(180deg, rgb(1, 150, 1) , rgb(1, 180, 1));
+    height: 40px;
+    padding: 10px 5% 10px 5%;
+}
+
+/*
+All the text within the elements with toolbar class and t2 will have the determined attributes
+Font-size determines the size of the font
+padding determines a space within the element between it's borders and content, as: x y z w; x = top, y = right, z = bottom and w = left.
+*/
+.toolbar.t2 .link .text {
+    font-size: small;
+    padding: 0 5px 0px 5px;
+    position: relative;
+    top: -5px;
+}
+
+/*
+Class with the flex attribute to space elements horizontally, making them occupy the oposite side of the element - one
+is positioned at the extreme left as the other is in extreme right
+*/
+.spacer{
+    flex: auto 1 1;
+}
+
+/*
+Way to prevent the default css for the a tag, both the a tag color and text-decoration were removed
+*/
+a {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
