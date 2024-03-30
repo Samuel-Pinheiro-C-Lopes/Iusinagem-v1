@@ -2,3 +2,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*
+Class with the flex attribute to space elements horizontally, making them occupy the oposite side of the element - one
+is positioned at the extreme left as the other is in extreme right
+*/
+.spacer{
+    flex: auto 1 1;
+}

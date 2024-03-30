@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-toolbar',
   standalone: true,
   imports: [
-    MatToolbarModule, MatIconModule,
+    MatToolbarModule, MatIconModule, 
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'

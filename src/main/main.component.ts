@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
-import { MatStepperModule } from '@angular/material/stepper';
+import { StepperComponent } from './stepper/stepper.component';
+
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [MatStepperModule, ],
+  imports: [StepperComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })

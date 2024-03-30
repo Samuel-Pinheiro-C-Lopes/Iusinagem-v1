@@ -1,0 +1,27 @@
+<p>
+    <!-- Mat Stepper component -->
+    <mat-stepper
+        #stepper
+    >
+        <mat-step [stepControl] = "ElementGroup" errorMessage = "Tipo de peça requerida">
+            <form [formGroup] = "ElementGroup">
+                <ng-template matStepLabel>Insira a peça</ng-template>
+                <mat-form-field>
+                    <mat-label>Peça</mat-label>
+                    <mat-select
+                        formControlName="firstCtrl"
+                        required
+                    >
+                        @for (element of elements; track elements;) {
+                            <mat-option [value] = "element">{{ element }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </mat-step>
+
+        <mat-step>
+            <form></form>    
+        </mat-step>
+    </mat-stepper>
+</p>

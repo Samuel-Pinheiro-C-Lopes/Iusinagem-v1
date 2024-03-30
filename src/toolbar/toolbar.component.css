@@ -46,14 +46,6 @@ padding determines a space within the element between it's borders and content, 
 }
 
 /*
-Class with the flex attribute to space elements horizontally, making them occupy the oposite side of the element - one
-is positioned at the extreme left as the other is in extreme right
-*/
-.spacer{
-    flex: auto 1 1;
-}
-
-/*
 Way to prevent the default css for the a tag, both the a tag color and text-decoration were removed
 */
 a {
