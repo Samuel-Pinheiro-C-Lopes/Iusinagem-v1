@@ -10,3 +10,8 @@ is positioned at the extreme left as the other is in extreme right
 .spacer{
     flex: auto 1 1;
 }
+
+.space {
+    width: 50px;
+    margin: 0 10px 0 10px;
+}

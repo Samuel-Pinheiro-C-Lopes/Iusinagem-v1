@@ -3,25 +3,148 @@
     <mat-stepper
         #stepper
     >
-        <mat-step [stepControl] = "ElementGroup" errorMessage = "Tipo de peça requerida">
-            <form [formGroup] = "ElementGroup">
+        <!-- First step - enter with the product intendend -->
+        <mat-step>
+                <!-- Title of the step since it's tagged as 'matStepLabel' -->
                 <ng-template matStepLabel>Insira a peça</ng-template>
+
+                <!-- 
+                    A form field labeled as 'Peça' with a mat-select element which has an ngFor directive - with it's new
+                    syntax - that iterates the elements array within stepper component's ts code, showing it's content
+                    as the options for the selection
+                -->
                 <mat-form-field>
                     <mat-label>Peça</mat-label>
                     <mat-select
-                        formControlName="firstCtrl"
                         required
+                        [(ngModel)]="process_config.element"
                     >
                         @for (element of elements; track elements;) {
                             <mat-option [value] = "element">{{ element }}</mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
-            </form>
+
+                <!-- 
+                    Div that contains the stepper's buttons, having each one an attribute for the action it has to take in the
+                    stepper 
+                -->
+                <div class="step-btns">
+                    <button mat-button matStepperNext>Próximo</button>
+                </div>
+        </mat-step>
+
+        <!-- Second step, enter with the attributes that the product has before it's turning - like diameter, condition and others -->
+        <mat-step>
+            <!-- Title of the step since it's tagged as 'matStepLabel' -->
+            <ng-template matStepLabel>Estado pré-usinagem</ng-template>
+
+            <!-- 
+                A form field labeled as 'Diâmetro (mm)' with a input designed to add the measurement typed by the user in the 
+                'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                of value - and has the matInput attribute for style and behavior
+            -->
+            <mat-form-field>
+                <mat-label>Diâmetro (mm)</mat-label>
+                <input 
+                    [(ngModel)] = "process_config.preDiameter"
+                    required 
+                    matInput 
+                    type="number" 
+                />
+            </mat-form-field>
+
+            <!-- 
+                A form field labeled as 'Comprimento (mm)' with a input designed to add the measurement typed by the user in the 
+                'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                of value - and has the matInput attribute for style and behavior
+            -->
+            <mat-form-field>
+                <mat-label>Comprimento (mm)</mat-label>
+                <input 
+                    [(ngModel)] = "process_config.preLength"
+                    required 
+                    matInput 
+                    type="number" 
+                />
+            </mat-form-field>
+
+            <!-- 
+                A form field labeled as 'Condição' with a mat-select element which has an ngFor directive - with it's new
+                syntax - that iterates the elements array within stepper component's ts code, showing it's content
+                as the options for the selection
+            -->
+            <mat-form-field>
+                <mat-label>Condição</mat-label>
+                <mat-select
+                    [(ngModel)] = "process_config.condition" 
+                    required
+                >
+                    @for (condition of conditions; track conditions) {
+                        <mat-option [value] = "condition">{{ condition }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <!-- 
+                A form field labeled as 'Material' with a mat-select element which has an ngFor directive - with it's new
+                syntax - that iterates the elements array within stepper component's ts code, showing it's content
+                as the options for the selection
+            -->
+            <mat-form-field>
+                <mat-label>Material</mat-label>
+                <mat-select 
+                    [(ngModel)] = "process_config.material"
+                    required
+                >
+                    @for (material of materials; track materials) {
+                        <mat-option [value] = 'material'>{{ material }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <!-- 
+                Div that contains the stepper's buttons, having each one an attribute for the action it has to take in the
+                stepper 
+            -->
+            <div class="step-btns">
+                <button mat-button matStepperPrevious>Anterior</button>
+                <button mat-button matStepperNext>Próximo</button>
+            </div>
+        </mat-step>
+
+        <!-- First step - enter with the product's dimensions -->
+        <mat-step>
+            <ng-template matStepLabel>Geometria do produto</ng-template>
+            
+            @for (geometry of process_config.productsGeometry; track process_config.productsGeometry) {
+                <mat-form-field>
+
+                </mat-form-field>
+            }
+            
+            <div class="step-btns">
+                <button class="warn" mat-button>Reiniciar etapa</button>
+                <button class="default" mat-button>Acrescentar geometria de um trecho</button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="step-btns">
+                <button mat-button matStepperPrevious>Anterior</button>
+                <button mat-button matStepperNext>Próximo</button>
+            </div>
         </mat-step>
 
         <mat-step>
-            <form></form>    
+            <ng-template matStepLabel>Geometria do produto</ng-template>    
+            <mat-form-field>
+                <input matInput type="text" />
+            </mat-form-field>       
+            
+            <div class="step-btns">
+                <button mat-button matStepperPrevious>Anterior</button>
+                <button mat-button matStepperNext>Próximo</button>
+            </div>
         </mat-step>
+
     </mat-stepper>
 </p>
