@@ -1,25 +1,74 @@
-.stepper-form {
-    border: black 1px solid;
-    border-radius: 2px;
-    width: 90%;
-    height: 100px;
-    padding: 20px;
-}
-
-.stepper-form .lign {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
+/*
+The form field from the Angular Material is being declared and it's style is being specified below
+Display 'flex' and 'justify-content' are adjusting how the child elements within the mat-form-field must look
+Child elements are distributed horizontally and, in that case - where there are only two elements - both will occupy
+the left and right corner - respectively - of it's parent element
+*/
 .mat-mdc-form-field {
     margin-top: 16px;
     display: flex;
     justify-content: space-between;
 }
 
+/*
+Class for the ligns presents in the stepper component with, typically, two buttons
+Display 'flex' and 'justify-content' - specifically 'space-between' - makes it's buttons space away
+from one another horizontally and equally
+*/
 .step-btns {
-    padding-top: 20px;
+    padding: 20px 5px 10px 5px;
     display: flex;
     justify-content: space-between;
+}
+
+/*
+Class designed for the geometry elements inside the step three and four, responsible
+for adjusting the child elements position and setting it's margin - in all directions
+*/
+.form-container-3 {
+    margin: 2px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*
+Class designed for the geometry elements inside the step three and four, specifically the mat-form-field elements inside it.
+The width is being specified so that the element doesn't occupy the whole width of it's parent element
+*/
+.form-container-3 mat-form-field {
+    width: 230px;
+}
+
+/*
+Class for the title that every geometry element inside the @for directiver in step
+three and four have
+The font size is determined, and it's text is aligned to the center of it's parent element
+*/
+.geometry-title {
+    font-size: medium;
+    text-align: center;
+}
+
+/*
+Class for the mat-icon element within the geometries in step three and four
+The margin is being estabilished to move away the element from the up corner of the parent element, making
+it more pleasent to see and easy to notice
+Since it's size is determined by the font-size, it's being determined as 20 pixels
+The cursor, while it's above the element, will look as a cursor of type pointer - the same as a link
+Transition determines how some changes will look and how fast they are going to happen - visually, of course
+*/
+.close-icon {
+    margin: 10px 0 0 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.5s all;
+}
+
+/*
+Elements with this class, while being hovered by the cursor, will behave according to 
+it's css especified below
+The font-size increases, incresing it's size
+*/
+.close-icon:hover {
+    font-size: 25px;
 }

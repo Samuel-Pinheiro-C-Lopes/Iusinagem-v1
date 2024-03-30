@@ -8,6 +8,7 @@
                 <!-- Title of the step since it's tagged as 'matStepLabel' -->
                 <ng-template matStepLabel>Insira a peça</ng-template>
 
+                <mat-divider></mat-divider>
                 <!-- 
                     A form field labeled as 'Peça' with a mat-select element which has an ngFor directive - with it's new
                     syntax - that iterates the elements array within stepper component's ts code, showing it's content
@@ -25,12 +26,15 @@
                     </mat-select>
                 </mat-form-field>
 
+                <mat-divider></mat-divider>
+
                 <!-- 
                     Div that contains the stepper's buttons, having each one an attribute for the action it has to take in the
                     stepper 
                 -->
                 <div class="step-btns">
-                    <button mat-button matStepperNext>Próximo</button>
+                    <button color= "primary" disabled mat-flat-button>Anterior</button>
+                    <button color="primary" mat-flat-button matStepperNext>Próximo</button>
                 </div>
         </mat-step>
 
@@ -38,6 +42,8 @@
         <mat-step>
             <!-- Title of the step since it's tagged as 'matStepLabel' -->
             <ng-template matStepLabel>Estado pré-usinagem</ng-template>
+
+            <mat-divider></mat-divider>
 
             <!-- 
                 A form field labeled as 'Diâmetro (mm)' with a input designed to add the measurement typed by the user in the 
@@ -103,47 +109,227 @@
                 </mat-select>
             </mat-form-field>
 
+            <mat-divider></mat-divider>
+
             <!-- 
                 Div that contains the stepper's buttons, having each one an attribute for the action it has to take in the
                 stepper 
             -->
             <div class="step-btns">
-                <button mat-button matStepperPrevious>Anterior</button>
-                <button mat-button matStepperNext>Próximo</button>
+                <button color = "primary" mat-flat-button matStepperPrevious>Anterior</button>
+                <button color = "primary" mat-flat-button matStepperNext>Próximo</button>
             </div>
         </mat-step>
 
-        <!-- First step - enter with the product's dimensions -->
+        <!-- Third step - enter with the product's external dimensions -->
         <mat-step>
-            <ng-template matStepLabel>Geometria do produto</ng-template>
-            
-            @for (geometry of process_config.productsGeometry; track process_config.productsGeometry) {
-                <mat-form-field>
+            <!-- Title of the step since it's tagged as 'matStepLabel' -->
+            <ng-template matStepLabel>Geometria Externa do produto</ng-template>
 
-                </mat-form-field>
+            <mat-divider></mat-divider>
+            
+            <!-- 
+                ngFor directive with the new syntax from the most recent version of Angular - 17.3.1 -, in the case below, it creates form fields according to parts
+                of the object - each input's binded data changes based in it's actual iteration -, allowing the user to create multiple especifications
+                toward the process
+                productsExternalGeometry is an array of objects within the process_config objects, created to keep the length in which a determined diamater
+                is set, according to the data inputed by the user 
+             -->
+            @for (geometry of process_config.productsExternalGeometry; track process_config.productsExternalGeometry) {
+                <!-- Mat-icon responsible for binding it's own (click) event to an function that removes the determined geometry-->
+                <mat-icon 
+                    class="close-icon" 
+                    (click) = "removeGeometry('external', $index)"
+                >
+                    close
+                </mat-icon>
+                <p
+                    class="geometry-title"
+                >
+                    <!-- if the start of the measurement isn't inputed, it just shows '?? mm-?? mm' and, when the user inputs some data, it changes according -->
+                    Trecho: {{(geometry?.start != undefined) ? (geometry?.start) : '?? ' }}mm-{{(geometry?.end != undefined) ? (geometry?.end) : '?? '}}mm  
+                    (Diâmetro: {{(geometry?.diameter != undefined) ? (geometry?.diameter) : '?? '}})
+                </p>
+                <div
+                    class="form-container-3"
+                >
+                    <!-- 
+                        A form field labeled as 'Início (mm)' with a input designed to add the measurement typed by the user in the 
+                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                        of value - and has the matInput attribute for style and behavior
+                    -->                   
+                    <mat-form-field>
+                        <mat-label>Início (mm)</mat-label>
+                        <input 
+                            type="number"
+                            [(ngModel)] = "geometry.start"
+                            matInput 
+                            required
+                        />
+                    </mat-form-field>
+
+                    <!-- 
+                        A form field labeled as 'Fim (mm)' with a input designed to add the measurement typed by the user in the 
+                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                        of value - and has the matInput attribute for style and behavior
+                    -->                    
+                    <mat-form-field>
+                        <mat-label>Fim (mm)</mat-label>
+                        <input 
+                            type="number"
+                            [(ngModel)] = "geometry.end"
+                            matInput 
+                            required    
+                        />
+                    </mat-form-field>
+
+                    <!-- 
+                        A form field labeled as 'Diâmetro Externo (mm)' with a input designed to add the measurement typed by the user in the 
+                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                        of value - and has the matInput attribute for style and behavior
+                     -->
+                    <mat-form-field>
+                        <mat-label>Diâmetro Externo</mat-label>
+                        <input 
+                            type="number"
+                            [(ngModel)] = "geometry.diameter" 
+                            matInput 
+                            required 
+                        />
+                    </mat-form-field>
+                </div>
+
+                <mat-divider></mat-divider>
             }
             
+            <!-- 
+                div containing a reset and add button, both being able to edit the step according to the user's wish, allowing more especific interations
+                (click) event is binded to certain functions within the stepper's ts code, receiving a string as argument to select which 
+                object will have an element added or have all of them removed
+            -->
             <div class="step-btns">
-                <button class="warn" mat-button>Reiniciar etapa</button>
-                <button class="default" mat-button>Acrescentar geometria de um trecho</button>
+                <button color="warn" (click) = "resetGeometry('external')" mat-button>Reiniciar etapa</button>
+                <button color="default" (click) = "addNewGeometry('external')" mat-button>Acrescentar geometria de um trecho</button>
             </div>
+
             <mat-divider></mat-divider>
+
+            <!-- 
+                Div that contains the stepper's buttons, having each one an attribute for the action it has to take in the
+                stepper 
+            -->
             <div class="step-btns">
-                <button mat-button matStepperPrevious>Anterior</button>
-                <button mat-button matStepperNext>Próximo</button>
+                <button color="primary" mat-flat-button matStepperPrevious>Anterior</button>
+                <button color="primary" mat-flat-button matStepperNext>Próximo</button>
+            </div>
+        </mat-step>
+
+         <!-- Third step - enter with the product's external dimensions -->
+        <mat-step>
+            <!-- Title of the step since it's tagged as 'matStepLabel' -->
+            <ng-template matStepLabel>Geometria Interna do produto</ng-template>    
+
+            <mat-divider></mat-divider>
+
+            <!-- 
+                ngFor directive with the new syntax from the most recent version of Angular - 17.3.1 -, in the case below, it creates form fields according to parts
+                of the object - each input's binded data changes based in it's actual iteration -, allowing the user to create multiple especifications
+                toward the process
+                productsExternalGeometry is an array of objects within the process_config objects, created to keep the length in which a determined diamater
+                is set, according to the data inputed by the user 
+             -->
+            @for (geometry of process_config.productsInternalGeometry; track process_config.productsInternalGeometry) {
+
+                <!-- Mat-icon responsible for binding it's own (click) event to an function that removes the determined geometry-->
+                <mat-icon 
+                    class="close-icon" 
+                    (click) = "removeGeometry('internal', $index)"
+                >
+                    close
+                </mat-icon>
+                <p
+                    class="geometry-title"
+                >
+                    <!-- if the start of the measurement isn't inputed, it just shows '?? mm-?? mm' and, when the user inputs some data, it changes according -->
+                    Trecho: {{(geometry?.start != undefined) ? (geometry?.start) : '?? ' }}mm-{{(geometry?.end != undefined) ? (geometry?.end) : '?? '}}mm  
+                    (Diâmetro: {{(geometry?.diameter != undefined) ? (geometry?.diameter) : '?? '}})
+                </p>
+                <div
+                    class="form-container-3"
+                >
+                    <!-- 
+                        A form field labeled as 'Início (mm)' with a input designed to add the measurement typed by the user in the 
+                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                        of value - and has the matInput attribute for style and behavior
+                    -->        
+                    <mat-form-field>
+                        <mat-label>Início</mat-label>
+                        <input 
+                            type="number"
+                            [(ngModel)] = "geometry.start"
+                            matInput 
+                            required
+                        />
+                    </mat-form-field>
+
+                    <!-- 
+                        A form field labeled as 'Fim (mm)' with a input designed to add the measurement typed by the user in the 
+                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                        of value - and has the matInput attribute for style and behavior
+                    --> 
+                    <mat-form-field>
+                        <mat-label>Fim</mat-label>
+                        <input 
+                            type="number"
+                            [(ngModel)] = "geometry.end"
+                            matInput 
+                            required    
+                        />
+                    </mat-form-field>
+
+                    <!-- 
+                        A form field labeled as 'Diâmetro Interno (mm)' with a input designed to add the measurement typed by the user in the 
+                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                        of value - and has the matInput attribute for style and behavior
+                    --> 
+                    <mat-form-field>
+                        <mat-label>Diâmetro Interno</mat-label>
+                        <input 
+                            type="number"
+                            [(ngModel)] = "geometry.diameter" 
+                            matInput 
+                            required 
+                        />
+                    </mat-form-field>
+                </div>
+
+                <mat-divider></mat-divider>
+            }
+
+            <!-- 
+                div containing a reset and add button, both being able to edit the step according to the user's wish, allowing more especific interations
+                (click) property is binded to certain functions within the stepper's ts code, receiving a string as argument to select which 
+                object will have an element added or have all of them removed
+            -->
+            <div class="step-btns">
+                <button color="warn" (click) = "resetGeometry('internal')" mat-button>Reiniciar etapa</button>
+                <button color="default" (click) = "addNewGeometry('internal')" mat-button>Acrescentar geometria de um trecho</button>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <!-- 
+                Div that contains the stepper's buttons, having each one an attribute for the action it has to take in the
+                stepper 
+            -->            
+            <div class="step-btns">
+                <button color = "primary" mat-flat-button matStepperPrevious>Anterior</button>
+                <button color = "primary" mat-flat-button matStepperNext>Próximo</button>
             </div>
         </mat-step>
 
         <mat-step>
-            <ng-template matStepLabel>Geometria do produto</ng-template>    
-            <mat-form-field>
-                <input matInput type="text" />
-            </mat-form-field>       
-            
-            <div class="step-btns">
-                <button mat-button matStepperPrevious>Anterior</button>
-                <button mat-button matStepperNext>Próximo</button>
-            </div>
+            <ng-template matStepLabel></ng-template>
         </mat-step>
 
     </mat-stepper>

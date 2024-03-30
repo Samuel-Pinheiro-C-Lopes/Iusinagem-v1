@@ -1,75 +1,157 @@
+//Basic module for the component behavior, core for the Angular application
 import { Component } from '@angular/core';
 
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatSelectModule} from '@angular/material/select';
-import { CommonModule } from '@angular/common';
-import {MatDividerModule} from '@angular/material/divider';
+//All the modules required for the component
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-stepper',
   standalone: true,
-  providers: [
-    {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: {showError: true},
-    },
-  ],
+  providers: [],
   imports: [    
     MatStepperModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    CommonModule,
     MatDividerModule,
+    MatIconModule,
+    MatSelectModule,
+    FormsModule,
   ],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'
 })
 export class StepperComponent {
 
+
+  /*
+  Object responsible for saving all the data the user inputs in the stepper
+  It has the element the user wants to make, it's length and diameter before the whole process,
+  it's condition and material, and all the measurement changes aimed
+  It's essential for the application since it's data will be used to determine the inserts,
+  drills, and then, accordingly, determine all the variables within the calculations needed
+  */
   public process_config:{
     element: string, 
-    preLength: number | undefined, 
-    preDiameter: number | undefined, 
+    preLength?: number, 
+    preDiameter?: number, 
     condition: string, 
     material: string,
-    productsGeometry:{start: number, end: number, diameter: number}[] | undefined,
-    productsParameters:{iso: string, Ac: number, fn: number, vc: number} | undefined,
+    productsExternalGeometry?:{start?: number, end?: number, diameter?: number}[],
+    productsInternalGeometry?:{start?: number, end?: number, diameter?: number}[],
+    productsParameters?:{iso: string, Ac: number, fn: number, vc: number},
   } = {
     element: '',
     preLength: undefined,
     preDiameter: undefined,
     condition: '',
     material: '',
-    productsGeometry: undefined,
+    productsExternalGeometry: [
+      {start: undefined, end: undefined, diameter: undefined},
+    ],
+    productsInternalGeometry: [
+      {start: undefined, end: undefined, diameter:undefined},
+    ],
     productsParameters: undefined,
   };
 
+  //available elements
   elements:string[] = [
     'Eixo',
     'Flange',
   ];
 
+  //available conditions for the element before it treatment 
   conditions:string[] = [
     'Boa',
     'Média',
     'Difícil',
   ];
 
+  //available materials for the element 
   materials:string[] = [
     'Aço',
     'Aço Inoxidável',
     'Ferro Fundido',
     'Superliga',
-  ]
+  ];
+
+  /*
+  Function responsible for adding - pushing - a new geometry inside the array of external measurements inputed by the user.
+  According to the type of button that called the function, a different array will have a push - since there is one
+  for the external geometry and one for the internal geometry
+  */
+  addNewGeometry(type: string):number {
+    if (type === "external") 
+    {
+      this.process_config.productsExternalGeometry?.push({start: undefined, end: undefined, diameter: undefined});
+      return 1;
+    }
+    else if (type === "internal")
+    {
+      this.process_config.productsInternalGeometry?.push({start: undefined, end: undefined, diameter: undefined});
+      return 1;
+    } 
+    else
+    {
+      return 0
+    }
+  }
+
+  /*
+  Function responsible for reseting all the data inputed and changed by the user in the steps - being it three or four, depending
+  on the type entered by the caller of this function - since it's possible for the user to reset the internal and the external
+  geometries
+  */
+  resetGeometry(type:string):number {
+
+    if (type === "external")
+    {
+      this.process_config.productsExternalGeometry?.splice(0, this.process_config.productsExternalGeometry.length);
+      return 1;
+    }
+    else if (type === "internal")
+    {
+      this.process_config.productsInternalGeometry?.splice(0, this.process_config.productsInternalGeometry.length);
+      return 1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
+
+  /*
+  Function responsible for removing an especific geometry setted or added by the user while in
+  the step three or four
+  It traks which geometry must be deleted accordingly to the index of the element that called the function,
+  since the close button is a child element present in every geometry in the DOM
+  */
+  removeGeometry(type:string, idx: number):number {
+    
+    if (type === "external")
+    {
+      this.process_config.productsExternalGeometry?.splice(idx, 1);
+      return 1;
+    }
+    else if (type === "internal")
+    {
+      this.process_config.productsInternalGeometry?.splice(idx, 1);
+      return 1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
 
 }
