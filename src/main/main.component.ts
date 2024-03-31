@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 
+import { MatDivider } from '@angular/material/divider';
+
 import { StepperComponent } from './stepper/stepper.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 /*
 data type for the inserts arrays that will be treated by the application
 and used to provide the user the best tools and it's parameters and
 specific variables according to the situation inputed in the stepper component
 */
-interface pastilha {
+export interface insert {
   iso: string,
   geometria: string,
   classe: number,
@@ -22,14 +25,14 @@ interface pastilha {
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [StepperComponent],
+  imports: [StepperComponent, CatalogComponent, MatDivider],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class AppMainComponent {
 
   //data for the external machining inserts - Sandvik Coromant
-  external:pastilha[] = [
+  external:insert[] = [
     //Coroturn107 para aços - pág 11 -> 13
 
       //boas condições
@@ -139,7 +142,7 @@ export class AppMainComponent {
   ];
 
   //data for the internal machining
-  internal:pastilha[] = [
+  internal:insert[] = [
 
   
   ];

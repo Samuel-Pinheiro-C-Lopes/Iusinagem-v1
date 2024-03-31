@@ -1,5 +1,5 @@
 //Basic module for the component behavior, core for the Angular application
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 //All the modules required for the component
 import { MatButtonModule } from '@angular/material/button';
@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { insert } from '../main.component';
 
 
 @Component({
@@ -63,6 +64,8 @@ export class StepperComponent {
     ],
     productsParameters: undefined,
   };
+
+  @Input() externalInsertData?:insert[];
 
   //available elements
   elements:string[] = [
