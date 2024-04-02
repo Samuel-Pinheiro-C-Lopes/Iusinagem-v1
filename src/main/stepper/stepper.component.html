@@ -329,7 +329,50 @@
         </mat-step>
 
         <mat-step>
-            <ng-template matStepLabel></ng-template>
+            <ng-template matStepLabel>Obtenção de parâmetros</ng-template>
+
+            <mat-divider></mat-divider>
+
+            <!--
+                Checks if the preLength, preDiameter, condition and material
+                are inputed and checks if some geometry has been pushed and,
+                if so, check if some field isn't defined - if the conditions
+                are true, the user can see the data and, if it isn't, and error message
+                appears in the else directive
+            -->
+            @if
+            (
+                (process_config.preLength && process_config.preDiameter 
+                && process_config.condition && process_config.material && 
+                (process_config.productsExternalGeometry?.length || 
+                process_config.productsInternalGeometry?.length)) 
+                &&
+                ((checkGeometries(process_config.productsExternalGeometry) && 
+                !process_config.productsInternalGeometry?.length) ||
+                (checkGeometries(process_config.productsInternalGeometry) && 
+                !process_config.productsExternalGeometry?.length) ||
+                (checkGeometries(process_config.productsExternalGeometry) &&
+                checkGeometries(process_config.productsInternalGeometry)))
+            )
+            {
+               <div>
+                    @for (geometry of process_config.productsExternalGeometry; 
+                        track process_config.productsExternalGeometry) {
+                        <div></div>
+                    }
+               </div>
+               <div>
+                    @for (geometry of process_config.productsInternalGeometry; 
+                    track process_config.productsInternalGeometry) {
+                        <div></div>
+                }
+               </div>
+            }
+            @else {
+                <div>
+                    Por favor, preencha todos os campos necessários.
+                </div>
+            }
         </mat-step>
 
     </mat-stepper>

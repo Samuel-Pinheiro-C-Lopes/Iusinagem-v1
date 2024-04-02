@@ -51,7 +51,7 @@ export class StepperComponent {
     material: string,
     productsExternalGeometry?:{start?: number, end?: number, diameter?: number}[],
     productsInternalGeometry?:{start?: number, end?: number, diameter?: number}[],
-    productsParameters?:{iso: string, Ac: number, fn: number, vc: number},
+    productsParameters?:{iso: string, class: number, vc: number, fn: number, ap: number, },
   } = {
     element: '',
     preLength: undefined,
@@ -157,6 +157,12 @@ export class StepperComponent {
     {
       return 0;
     }
+  }
+
+  checkGeometries(geometry?:{start?: number, end?: number, diameter?: number}[]) {
+    return geometry?.filter((el) => {
+      return (el.start && el.end && el.diameter);
+    }).length; 
   }
 
 }
