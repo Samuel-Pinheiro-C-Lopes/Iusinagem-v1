@@ -1,0 +1,8 @@
+.insert-description {
+    display: flex;
+    justify-content: space-between;
+}
+
+.insert-description p {
+    margin-right: 50px;
+}

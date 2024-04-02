@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { insert } from '../main.component';
+import { PanelComponent } from '../panel/panel.component';
 
 
 
@@ -29,6 +30,7 @@ import { insert } from '../main.component';
     MatIconModule,
     MatSelectModule,
     FormsModule,
+    PanelComponent
   ],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'

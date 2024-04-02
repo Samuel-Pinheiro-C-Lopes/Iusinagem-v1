@@ -365,7 +365,7 @@
                     @for (geometry of process_config.productsInternalGeometry; 
                     track process_config.productsInternalGeometry) {
                         <div></div>
-                }
+                    }
                </div>
             }
             @else {
@@ -377,3 +377,7 @@
 
     </mat-stepper>
 </p>
+
+@for (insert of externalInsertData; track externalInsertData) {
+    <app-panel [insert] = "insert"></app-panel>
+}
