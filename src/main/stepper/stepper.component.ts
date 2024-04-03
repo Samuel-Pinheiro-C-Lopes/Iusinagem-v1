@@ -152,12 +152,40 @@ export class StepperComponent {
     },
   ];
 
+  insertFiltered(insert:insert[], processObj: process) {
+
+    const material = processObj.material;
+    let materialN = '';
+
+    materialN = material === 'aço' ? 'p' : 
+    material === 'aço inoxídavel' ? 'm' : 
+    material === 'ferro fundido' ? 'k' : 
+    material === 'superliga' ? 's' : '';
+
+    const insertFiltered = insert.filter((el) => {
+      return  el.condition.toLowerCase() == processObj.condition.toLowerCase()
+      && el.material.toLowerCase() == materialN
+    });
+    return insertFiltered;
+  }
+
+  filtered:insert[] = this.insertFiltered(this.insertTest, this.configTest);
+
   insertFilter(insertArr:insert[], processObj: process):insert[] {
+
+    const material = processObj.material;
+    let materialN = '';
+
+    materialN = material === 'aço' ? 'p' : 
+    material === 'aço inoxídavel' ? 'm' : 
+    material === 'ferro fundido' ? 'k' : 
+    material === 'superliga' ? 's' : '';
+
     const insertFiltered = insertArr.filter((el) => {
       return (
-        el.material === processObj.material.toLowerCase() 
+        el.material.toLowerCase() === materialN.toLowerCase() 
         && 
-        el.condition === processObj.condition.toLowerCase()
+        el.condition.toLowerCase() === processObj.condition.toLowerCase()
       );
     });
     return insertFiltered;
@@ -179,6 +207,8 @@ export class StepperComponent {
     return parameters;
   }
 
+  parametersCalculated:parameters[] = this.insertCalculator(this.insertTest, this.configTest, this.geometryTest[1]);
+
   insertFiltrateThenCalculate(insert:insert[], processObj: process, geometry: geometry):[insert, parameters][] {
     const filtratedInserts:insert[] = this.insertFilter(insert, processObj);
     const parameters:parameters[] = this.insertCalculator(filtratedInserts, processObj, geometry);
@@ -193,6 +223,8 @@ export class StepperComponent {
 
     return insertsAndParameters;
   }
+
+  filtratedAndCalculated = this.insertFiltrateThenCalculate(this.insertTest, this.configTest, this.geometryTest[0])
 
   clickEvent() {
     const t = this.insertFiltrateThenCalculate(this.insertTest, this.configTest, this.configTest.productsExternalGeometry[1]);
