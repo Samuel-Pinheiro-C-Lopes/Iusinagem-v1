@@ -128,80 +128,87 @@
 
             <mat-divider></mat-divider>
             
-            <!-- 
-                ngFor directive with the new syntax from the most recent version of Angular - 17.3.1 -, in the case below, it creates form fields according to parts
-                of the object - each input's binded data changes based in it's actual iteration -, allowing the user to create multiple especifications
-                toward the process
-                productsExternalGeometry is an array of objects within the process_config objects, created to keep the length in which a determined diamater
-                is set, according to the data inputed by the user 
-             -->
-            @for (geometry of process_config.productsExternalGeometry; track process_config.productsExternalGeometry) {
-                <!-- Mat-icon responsible for binding it's own (click) event to an function that removes the determined geometry-->
-                <mat-icon 
-                    class="close-icon" 
-                    (click) = "removeGeometry('external', $index)"
-                >
-                    close
-                </mat-icon>
-                <p
-                    class="geometry-title"
-                >
-                    <!-- if the start of the measurement isn't inputed, it just shows '?? mm-?? mm' and, when the user inputs some data, it changes according -->
-                    Trecho: {{(geometry?.start != undefined) ? (geometry?.start) : '?? ' }}mm-{{(geometry?.end != undefined) ? (geometry?.end) : '?? '}}mm  
-                    (Diâmetro: {{(geometry?.diameter != undefined) ? (geometry?.diameter) : '?? '}})
-                </p>
-                <div
-                    class="form-container-3"
-                >
-                    <!-- 
-                        A form field labeled as 'Início (mm)' with a input designed to add the measurement typed by the user in the 
-                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
-                        of value - and has the matInput attribute for style and behavior
-                    -->                   
-                    <mat-form-field>
-                        <mat-label>Início (mm)</mat-label>
-                        <input 
-                            type="number"
-                            [(ngModel)] = "geometry.start"
-                            matInput 
-                            required
-                        />
-                    </mat-form-field>
+            @if (process_config.productsExternalGeometry?.length) 
+            {
+                <!-- 
+                    ngFor directive with the new syntax from the most recent version of Angular - 17.3.1 -, in the case below, it creates form fields according to parts
+                    of the object - each input's binded data changes based in it's actual iteration -, allowing the user to create multiple especifications
+                    toward the process
+                    productsExternalGeometry is an array of objects within the process_config objects, created to keep the length in which a determined diamater
+                    is set, according to the data inputed by the user 
+                -->
+                @for (geometry of process_config.productsExternalGeometry; track process_config.productsExternalGeometry) {
+                    <!-- Mat-icon responsible for binding it's own (click) event to an function that removes the determined geometry-->
+                    <mat-icon 
+                        class="close-icon" 
+                        (click) = "removeGeometry('external', $index)"
+                    >
+                        close
+                    </mat-icon>
+                    <p
+                        class="geometry-title"
+                    >
+                        <!-- if the start of the measurement isn't inputed, it just shows '?? mm-?? mm' and, when the user inputs some data, it changes according -->
+                        Trecho: {{(geometry?.start != undefined) ? (geometry?.start) : '?? ' }}mm-{{(geometry?.end != undefined) ? (geometry?.end) : '?? '}}mm  
+                        (Diâmetro: {{(geometry?.diameter != undefined) ? (geometry?.diameter) : '?? '}})
+                    </p>
+                    <div
+                        class="form-container-3"
+                    >
+                        <!-- 
+                            A form field labeled as 'Início (mm)' with a input designed to add the measurement typed by the user in the 
+                            'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                            of value - and has the matInput attribute for style and behavior
+                        -->                   
+                        <mat-form-field>
+                            <mat-label>Início (mm)</mat-label>
+                            <input 
+                                type="number"
+                                [(ngModel)] = "geometry.start"
+                                matInput 
+                                required
+                            />
+                        </mat-form-field>
 
-                    <!-- 
-                        A form field labeled as 'Fim (mm)' with a input designed to add the measurement typed by the user in the 
-                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
-                        of value - and has the matInput attribute for style and behavior
-                    -->                    
-                    <mat-form-field>
-                        <mat-label>Fim (mm)</mat-label>
-                        <input 
-                            type="number"
-                            [(ngModel)] = "geometry.end"
-                            matInput 
-                            required    
-                        />
-                    </mat-form-field>
+                        <!-- 
+                            A form field labeled as 'Fim (mm)' with a input designed to add the measurement typed by the user in the 
+                            'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                            of value - and has the matInput attribute for style and behavior
+                        -->                    
+                        <mat-form-field>
+                            <mat-label>Fim (mm)</mat-label>
+                            <input 
+                                type="number"
+                                [(ngModel)] = "geometry.end"
+                                matInput 
+                                required    
+                            />
+                        </mat-form-field>
 
-                    <!-- 
-                        A form field labeled as 'Diâmetro Externo (mm)' with a input designed to add the measurement typed by the user in the 
-                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
-                        of value - and has the matInput attribute for style and behavior
-                     -->
-                    <mat-form-field>
-                        <mat-label>Diâmetro Externo</mat-label>
-                        <input 
-                            type="number"
-                            [(ngModel)] = "geometry.diameter" 
-                            matInput 
-                            required 
-                        />
-                    </mat-form-field>
-                </div>
+                        <!-- 
+                            A form field labeled as 'Diâmetro Externo (mm)' with a input designed to add the measurement typed by the user in the 
+                            'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                            of value - and has the matInput attribute for style and behavior
+                        -->
+                        <mat-form-field>
+                            <mat-label>Diâmetro Externo</mat-label>
+                            <input 
+                                type="number"
+                                [ngModel] = "geometry.diameter"
+                                matInput 
+                                required 
+                            />
+                        </mat-form-field>
+                    </div>
 
-                <mat-divider></mat-divider>
+                    <mat-divider></mat-divider>
+                }
             }
-            
+            @else
+            {
+                <h2>Acrescente a geometria externa de algum trecho</h2>
+            }
+
             <!-- 
                 div containing a reset and add button, both being able to edit the step according to the user's wish, allowing more especific interations
                 (click) event is binded to certain functions within the stepper's ts code, receiving a string as argument to select which 
@@ -231,6 +238,8 @@
 
             <mat-divider></mat-divider>
 
+            @if (process_config.productsInternalGeometry?.length) 
+            {
             <!-- 
                 ngFor directive with the new syntax from the most recent version of Angular - 17.3.1 -, in the case below, it creates form fields according to parts
                 of the object - each input's binded data changes based in it's actual iteration -, allowing the user to create multiple especifications
@@ -238,74 +247,78 @@
                 productsExternalGeometry is an array of objects within the process_config objects, created to keep the length in which a determined diamater
                 is set, according to the data inputed by the user 
              -->
-            @for (geometry of process_config.productsInternalGeometry; track process_config.productsInternalGeometry) {
+                @for (geometry of process_config.productsInternalGeometry; track process_config.productsInternalGeometry) {
 
-                <!-- Mat-icon responsible for binding it's own (click) event to an function that removes the determined geometry-->
-                <mat-icon 
-                    class="close-icon" 
-                    (click) = "removeGeometry('internal', $index)"
-                >
-                    close
-                </mat-icon>
-                <p
-                    class="geometry-title"
-                >
-                    <!-- if the start of the measurement isn't inputed, it just shows '?? mm-?? mm' and, when the user inputs some data, it changes according -->
-                    Trecho: {{(geometry?.start != undefined) ? (geometry?.start) : '?? ' }}mm-{{(geometry?.end != undefined) ? (geometry?.end) : '?? '}}mm  
-                    (Diâmetro: {{(geometry?.diameter != undefined) ? (geometry?.diameter) : '?? '}})
-                </p>
-                <div
-                    class="form-container-3"
-                >
-                    <!-- 
-                        A form field labeled as 'Início (mm)' with a input designed to add the measurement typed by the user in the 
-                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
-                        of value - and has the matInput attribute for style and behavior
-                    -->        
-                    <mat-form-field>
-                        <mat-label>Início</mat-label>
-                        <input 
-                            type="number"
-                            [(ngModel)] = "geometry.start"
-                            matInput 
-                            required
-                        />
-                    </mat-form-field>
+                    <!-- Mat-icon responsible for binding it's own (click) event to an function that removes the determined geometry-->
+                    <mat-icon 
+                        class="close-icon" 
+                        (click) = "removeGeometry('internal', $index)"
+                    >
+                        close
+                    </mat-icon>
+                    <p
+                        class="geometry-title"
+                    >
+                        <!-- if the start of the measurement isn't inputed, it just shows '?? mm-?? mm' and, when the user inputs some data, it changes according -->
+                        Trecho: {{(geometry?.start != undefined) ? (geometry?.start) : '?? ' }}mm-{{(geometry?.end != undefined) ? (geometry?.end) : '?? '}}mm  
+                        (Diâmetro: {{(geometry?.diameter != undefined) ? (geometry?.diameter) : '?? '}})
+                    </p>
+                    <div
+                        class="form-container-3"
+                    >
+                        <!-- 
+                            A form field labeled as 'Início (mm)' with a input designed to add the measurement typed by the user in the 
+                            'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                            of value - and has the matInput attribute for style and behavior
+                        -->        
+                        <mat-form-field>
+                            <mat-label>Início</mat-label>
+                            <input 
+                                type="number"
+                                [(ngModel)] = "geometry.start"
+                                matInput 
+                                required
+                            />
+                        </mat-form-field>
 
-                    <!-- 
-                        A form field labeled as 'Fim (mm)' with a input designed to add the measurement typed by the user in the 
-                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
-                        of value - and has the matInput attribute for style and behavior
-                    --> 
-                    <mat-form-field>
-                        <mat-label>Fim</mat-label>
-                        <input 
-                            type="number"
-                            [(ngModel)] = "geometry.end"
-                            matInput 
-                            required    
-                        />
-                    </mat-form-field>
+                        <!-- 
+                            A form field labeled as 'Fim (mm)' with a input designed to add the measurement typed by the user in the 
+                            'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                            of value - and has the matInput attribute for style and behavior
+                        --> 
+                        <mat-form-field>
+                            <mat-label>Fim</mat-label>
+                            <input 
+                                type="number"
+                                [(ngModel)] = "geometry.end"
+                                matInput 
+                                required    
+                            />
+                        </mat-form-field>
 
-                    <!-- 
-                        A form field labeled as 'Diâmetro Interno (mm)' with a input designed to add the measurement typed by the user in the 
-                        'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
-                        of value - and has the matInput attribute for style and behavior
-                    --> 
-                    <mat-form-field>
-                        <mat-label>Diâmetro Interno</mat-label>
-                        <input 
-                            type="number"
-                            [(ngModel)] = "geometry.diameter" 
-                            matInput 
-                            required 
-                        />
-                    </mat-form-field>
-                </div>
+                        <!-- 
+                            A form field labeled as 'Diâmetro Interno (mm)' with a input designed to add the measurement typed by the user in the 
+                            'process_config' object within the stepper component's ts code. It's of type number - only accepting that type
+                            of value - and has the matInput attribute for style and behavior
+                        --> 
+                        <mat-form-field>
+                            <mat-label>Diâmetro Interno</mat-label>
+                            <input 
+                                type="number"
+                                [(ngModel)] = "geometry.diameter" 
+                                matInput 
+                                required 
+                            />
+                        </mat-form-field>
+                    </div>
 
-                <mat-divider></mat-divider>
+                    <mat-divider></mat-divider>
+                }
             }
-
+            @else 
+            {
+                <h2>Acrescente a geometria interna de algum trecho</h2>
+            }
             <!-- 
                 div containing a reset and add button, both being able to edit the step according to the user's wish, allowing more especific interations
                 (click) property is binded to certain functions within the stepper's ts code, receiving a string as argument to select which 
@@ -356,6 +369,11 @@
             )
             {
                <div>
+                    <!--
+                        For each geometry there will be certain inserts that will
+                        match the configs inputed by the user about the material.
+
+                    -->
                     @for (geometry of process_config.productsExternalGeometry; 
                         track process_config.productsExternalGeometry) {
                         <div></div>
@@ -369,15 +387,48 @@
                </div>
             }
             @else {
-                <div>
-                    Por favor, preencha todos os campos necessários.
-                </div>
+                <h2>
+                    Por favor, preencha todos os campos necessários com valores válidos.
+                </h2>
             }
         </mat-step>
 
     </mat-stepper>
 </p>
 
-@for (insert of externalInsertData; track externalInsertData) {
-    <app-panel [insert] = "insert"></app-panel>
+@for (geometry of geometryTest; track geometryTest) {
+    <div>
+        <p>{{geometry.start}} - {{geometry.end}} ({{geometry.diameter}})</p>
+        <mat-divider></mat-divider>
+        <!--
+            <app-inserts 
+                [geometry] = "geometry" 
+                [inserts] = "insertFilter(insertTest, process_config)"
+            ></app-inserts>
+        -->
+        
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                teste
+            </mat-panel-title>
+            <mat-panel-description> 
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            @for(relation of insertsAndParameters; track insertsAndParameters) 
+            {
+                <p>{{relation[1].rpm}}</p>
+                <p>{{relation[0].material}}</p>
+                <p>{{relation[0].condition}}</p>
+            }
+        </mat-expansion-panel>
+
+        <mat-divider></mat-divider>
+    </div>
 }
+
+<!-- As funçõe estão quebradas-->
+
+<button (click) = "clickEvent()"></button>
+
+<p> olha: {{insertsAndParameters[0]}}</p>

@@ -12,9 +12,30 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { insert } from '../main.component';
 import { PanelComponent } from '../panel/panel.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
+export interface geometry {
+  start: number;
+  end: number;
+  diameter: number;
+}
 
+export interface process {
+  element: string, 
+  preLength: number, 
+  preDiameter: number, 
+  condition: string, 
+  material: string,
+  productsExternalGeometry:geometry[],
+  productsInternalGeometry:geometry[],
+}
+
+export interface parameters {
+  rpm: number,
+  machiningTime: number,
+  metalRemotionRate: number,
+}
 
 @Component({
   selector: 'app-stepper',
@@ -30,7 +51,8 @@ import { PanelComponent } from '../panel/panel.component';
     MatIconModule,
     MatSelectModule,
     FormsModule,
-    PanelComponent
+    PanelComponent,
+    MatExpansionModule,
   ],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'
@@ -45,29 +67,139 @@ export class StepperComponent {
   It's essential for the application since it's data will be used to determine the inserts,
   drills, and then, accordingly, determine all the variables within the calculations needed
   */
-  public process_config:{
-    element: string, 
-    preLength?: number, 
-    preDiameter?: number, 
-    condition: string, 
-    material: string,
-    productsExternalGeometry?:{start?: number, end?: number, diameter?: number}[],
-    productsInternalGeometry?:{start?: number, end?: number, diameter?: number}[],
-    productsParameters?:{iso: string, class: number, vc: number, fn: number, ap: number, },
-  } = {
+  public process_config:process = {
     element: '',
-    preLength: undefined,
-    preDiameter: undefined,
+    preLength: 0,
+    preDiameter: 0,
     condition: '',
     material: '',
     productsExternalGeometry: [
-      {start: undefined, end: undefined, diameter: undefined},
+
     ],
     productsInternalGeometry: [
-      {start: undefined, end: undefined, diameter:undefined},
+
     ],
-    productsParameters: undefined,
   };
+
+  configTest:process = {
+    element: 'flange',
+    preLength: 300,
+    preDiameter: 200,
+    condition: 'boa',
+    material: 'aço',
+    productsExternalGeometry: [
+      {
+        start: 0, end: 10, diameter: 20, 
+      },
+  
+      {
+        start: 10, end: 30, diameter: 40, 
+      },
+  
+      {
+        start: 30, end: 100, diameter: 50, 
+      },
+    ],
+    productsInternalGeometry: [
+
+    ],
+  }
+
+
+  geometryTest:geometry[] = [
+    {
+      start: 0, end: 10, diameter: 20, 
+    },
+
+    {
+      start: 10, end: 30, diameter: 40, 
+    },
+
+    {
+      start: 30, end: 100, diameter: 50, 
+    },
+  ];
+
+  insertTest:insert[] = [
+    {
+      iso: "CCMT 06 02 02", geometry: "PF", class: 4325, vc: 495, fn: 0.06, 
+      ap: 0.25, material: "p", condition: "Boa", machine: "Coroturn 107"
+    },
+
+    {
+      iso: "CCMT 06 08 02", geometry: "PF", class: 4225, vc: 595, fn: 0.16, 
+      ap: 0.25, material: "p", condition: "Boa", machine: "Coroturn 107"
+    },
+
+    {
+      iso: "CCMT 06 04 02", geometry: "PF", class: 4125, vc: 795, fn: 0.6, 
+      ap: 0.25, material: "m", condition: "Boa", machine: "Coroturn 107"
+    },
+
+    {
+      iso: "DCMT 11 T3 08", geometry: "MF", class: 2015, vc: 275, fn: 0.15, 
+      ap: 0.40, material: "m", condition: "Boa", machine: "Coroturn 107"
+    },
+
+    {
+      iso: "TCMT 11 03 08", geometry: "KF", class: 3225, vc: 240, fn: 0.13, 
+      ap: 0.40, material: "k", condition: "Media", machine: "Coroturn 107"
+    },
+
+    {
+      iso: "TCMT 11 03 08", geometry: "KF", class: 5225, vc: 540, fn: 1.3, 
+      ap: 4.40, material: "k", condition: "Media", machine: "Coroturn 107"
+    },
+  ];
+
+  insertFilter(insertArr:insert[], processObj: process):insert[] {
+    const insertFiltered = insertArr.filter((el) => {
+      return (
+        el.material === processObj.material.toLowerCase() 
+        && 
+        el.condition === processObj.condition.toLowerCase()
+      );
+    });
+    return insertFiltered;
+  }
+
+  insertCalculator(insertArr:insert[], processObj: process, geometry: geometry):parameters[] {
+    const parameters:parameters[] = [
+      
+    ];
+
+    insertArr.forEach((el) => {
+      const tempRpm:number = (1000 * el.vc)/(processObj.preDiameter * Math.PI);
+      const tempMachiningTime:number = (geometry.end - geometry.start)/(el.fn * tempRpm);
+      const tempMetalRemotionRate:number = el.fn * el.vc * el.ap;
+
+      parameters.push({rpm: tempRpm, machiningTime: tempMachiningTime, metalRemotionRate: tempMetalRemotionRate})
+    });
+
+    return parameters;
+  }
+
+  insertFiltrateThenCalculate(insert:insert[], processObj: process, geometry: geometry):[insert, parameters][] {
+    const filtratedInserts:insert[] = this.insertFilter(insert, processObj);
+    const parameters:parameters[] = this.insertCalculator(filtratedInserts, processObj, geometry);
+
+    const insertsAndParameters:[insert, parameters][] = [
+
+    ];
+
+    filtratedInserts.forEach((el, idx) => {
+      insertsAndParameters.push([el, parameters[idx]]);
+    });
+
+    return insertsAndParameters;
+  }
+
+  clickEvent() {
+    const t = this.insertFiltrateThenCalculate(this.insertTest, this.configTest, this.configTest.productsExternalGeometry[1]);
+    return t;
+  }
+
+  insertsAndParameters = this.insertFilter(this.insertTest, this.configTest);
 
   @Input() externalInsertData?:insert[];
 
@@ -100,12 +232,12 @@ export class StepperComponent {
   addNewGeometry(type: string):number {
     if (type === "external") 
     {
-      this.process_config.productsExternalGeometry?.push({start: undefined, end: undefined, diameter: undefined});
+      this.process_config.productsExternalGeometry?.push({start: 0, end: 0, diameter: 0});
       return 1;
     }
     else if (type === "internal")
     {
-      this.process_config.productsInternalGeometry?.push({start: undefined, end: undefined, diameter: undefined});
+      this.process_config.productsInternalGeometry?.push({start: 0, end: 0, diameter: 0});
       return 1;
     } 
     else
@@ -163,7 +295,10 @@ export class StepperComponent {
 
   checkGeometries(geometry?:{start?: number, end?: number, diameter?: number}[]) {
     return geometry?.filter((el) => {
-      return (el.start && el.end && el.diameter);
+      return (
+          (el.start || el.start === 0) && (el.end || el.end === 0) && el.diameter
+          && el.diameter > 0 && el.start != el.end && el.start >= 0 && el.end >= 0
+        );
     }).length; 
   }
 

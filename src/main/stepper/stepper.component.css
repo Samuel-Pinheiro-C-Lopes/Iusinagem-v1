@@ -72,3 +72,9 @@ The font-size increases, incresing it's size
 .close-icon:hover {
     font-size: 25px;
 }
+
+h2 {
+    text-align: center;
+    font-size: large;
+    margin-top: 20px;
+}

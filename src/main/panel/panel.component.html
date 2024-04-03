@@ -2,17 +2,16 @@
     <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
         <mat-panel-title>
-            {{insert?.iso}}
+            teste
         </mat-panel-title>
         <mat-panel-description> 
-            <div
-                class="insert-description"
-            >
-                <p>{{insert?.class}}</p>
-                <p>{{insert?.geometry}}</p>
-            </div>
         </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>This is the primary content of the panel.</p>
+        @for(relation of insertsAndParameters; track insertsAndParameters) 
+        {
+            <p>{{relation[1].rpm}}</p>
+            <p>{{relation[0].material}}</p>
+            <p>{{relation[0].condition}}</p>
+        }
     </mat-expansion-panel>
 </p>

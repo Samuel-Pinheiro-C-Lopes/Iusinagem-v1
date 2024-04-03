@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { MatExpansionModule } from '@angular/material/expansion';
-import { Insert } from '../catalog/catalog.component';
+import { insert } from '../main.component';
+import { parameters } from '../stepper/stepper.component';
 
 @Component({
   selector: 'app-panel',
@@ -11,5 +12,7 @@ import { Insert } from '../catalog/catalog.component';
   styleUrl: './panel.component.css'
 })
 export class PanelComponent {
-  @Input() insert?:Insert;
+  @Input() insertsAndParameters!:[insert, parameters][]
+
+
 }
