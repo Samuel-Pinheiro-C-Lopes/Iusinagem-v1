@@ -396,7 +396,6 @@
     </mat-stepper>
 </p>
 
-<!-- As funçõe estão quebradas-->
 
 <button (click) = "clickEvent()"></button>
 
@@ -414,3 +413,34 @@
     <div>{{relation[1].rpm}}</div>
     <div>e {{relation[1].machiningTime}}</div>
 }
+<mat-divider></mat-divider>
+@for(geometry of process_config.productsExternalGeometry; track process_config.productsExternalGeometry) {
+    <p>{{geometry.start}} até {{geometry.end}}</p>
+    @for (relation of insertFiltrateThenCalculate(externalInsertData, process_config, geometry); track insertFiltrateThenCalculate(this.insertTest, 
+    this.configTest, this.geometryTest[0])) {
+        <app-panel [relation] = "relation"></app-panel>
+    }
+}
+
+<button
+    class="btn-generate"
+    (click) = "loadInsertsAndParameters()"
+>Gerar os componentes</button>
+
+<p>{{filtratedAndCalculated}}</p>
+
+<!-- 
+    The problem may be with the lack of a button to call the function once the variable changes 
+    
+    1# criar botão que altera o valor da variável capturada pela directiva @for das pastilhas
+    filtradas e seus parâmetros
+
+    2# O elemento dentro da primeira iteração receberá a geometria que, em seu interior, será tratada
+    e utilizada em função do método de filtro e calcular.
+
+    3# dentro desse elemento, usar insertFiltrateThenCalculate com a geometria do for pai, o process
+    config e o tipo de pastilha - externo ou interno - desejado
+
+    4# uma vez que isso seja efetuado, bastará clicar no botão novamente para recarregar o resultado
+
+-->

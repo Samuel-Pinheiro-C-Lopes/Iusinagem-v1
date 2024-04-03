@@ -12,7 +12,7 @@ import { parameters } from '../stepper/stepper.component';
   styleUrl: './panel.component.css'
 })
 export class PanelComponent {
-  @Input() insertsAndParameters!:[insert, parameters][]
+  @Input() relation!:[insert, parameters]
 
 
 }

@@ -224,7 +224,7 @@ export class StepperComponent {
     return insertsAndParameters;
   }
 
-  filtratedAndCalculated = this.insertFiltrateThenCalculate(this.insertTest, this.configTest, this.geometryTest[0])
+  
 
   clickEvent() {
     const t = this.insertFiltrateThenCalculate(this.insertTest, this.configTest, this.configTest.productsExternalGeometry[1]);
@@ -233,7 +233,18 @@ export class StepperComponent {
 
   insertsAndParameters = this.insertFilter(this.insertTest, this.configTest);
 
-  @Input() externalInsertData?:insert[];
+  filtratedAndCalculated!:[insert, parameters][];
+
+  loadInsertsAndParameters():void {
+    this.filtratedAndCalculated = this.insertFiltrateThenCalculate(this.externalInsertData, this.process_config, this.geometryTest[0])
+  }
+
+
+
+
+  //ABAIXO CÓDIGO LIMPO, ACIMA TESTES
+
+  @Input() externalInsertData!:insert[];
 
   //available elements
   elements:string[] = [
