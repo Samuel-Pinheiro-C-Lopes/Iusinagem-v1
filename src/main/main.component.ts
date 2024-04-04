@@ -546,7 +546,7 @@ external:insert[] = [
         },
 
         {
-          iso: "DCMT 07 02 04", geometry: "MM", class: 1105, vc: 80, fn: 0.08, ap: 0.70, 
+          iso: "DCMT 07 02 04", geometry: "MM", class: 1105, vc: 80.0, fn: 0.08, ap: 0.70, 
           material: "s", condition: "Boa", operation: 'Desbaste', machine: "Coroturn 107"
         },
 
