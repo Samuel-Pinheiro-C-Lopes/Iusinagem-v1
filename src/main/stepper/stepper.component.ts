@@ -13,12 +13,14 @@ import { FormsModule } from '@angular/forms';
 import { insert } from '../main.component';
 import { PanelComponent } from '../panel/panel.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { CommonModule } from '@angular/common';
 
 
 export interface geometry {
   start: number;
   end: number;
   diameter: number;
+  insertsAndParameters?: [insert, parameters][]
 }
 
 export interface process {
@@ -53,6 +55,7 @@ export interface parameters {
     FormsModule,
     PanelComponent,
     MatExpansionModule,
+    CommonModule,
   ],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'
@@ -68,13 +71,19 @@ export class StepperComponent {
   drills, and then, accordingly, determine all the variables within the calculations needed
   */
   public process_config:process = {
-    element: '',
-    preLength: 0,
-    preDiameter: 0,
-    condition: '',
-    material: '',
+    element: 'flange',
+    preLength: 300,
+    preDiameter: 200,
+    condition: 'difícil',
+    material: 'aço',
     productsExternalGeometry: [
-
+      {
+        start: 0, end: 10, diameter: 20, 
+      },
+  
+      {
+        start: 10, end: 30, diameter: 40, 
+      },
     ],
     productsInternalGeometry: [
 
@@ -88,17 +97,6 @@ export class StepperComponent {
     condition: 'boa',
     material: 'aço',
     productsExternalGeometry: [
-      {
-        start: 0, end: 10, diameter: 20, 
-      },
-  
-      {
-        start: 10, end: 30, diameter: 40, 
-      },
-  
-      {
-        start: 30, end: 100, diameter: 50, 
-      },
     ],
     productsInternalGeometry: [
 
@@ -152,45 +150,35 @@ export class StepperComponent {
     },
   ];
 
-  insertFiltered(insert:insert[], processObj: process) {
-
-    const material = processObj.material;
-    let materialN = '';
-
-    materialN = material === 'aço' ? 'p' : 
-    material === 'aço inoxídavel' ? 'm' : 
-    material === 'ferro fundido' ? 'k' : 
-    material === 'superliga' ? 's' : '';
-
-    const insertFiltered = insert.filter((el) => {
-      return  el.condition.toLowerCase() == processObj.condition.toLowerCase()
-      && el.material.toLowerCase() == materialN
-    });
-    return insertFiltered;
-  }
-
-  filtered:insert[] = this.insertFiltered(this.insertTest, this.configTest);
-
+  //filters the received inserts base on each material and condition, and
+  //the material and condition inputed in the processObj
   insertFilter(insertArr:insert[], processObj: process):insert[] {
 
     const material = processObj.material;
+    const condition = processObj.condition;
     let materialN = '';
+    let conditionN = '';
 
     materialN = material === 'aço' ? 'p' : 
-    material === 'aço inoxídavel' ? 'm' : 
+    material === 'aço inoxidável' ? 'm' : 
     material === 'ferro fundido' ? 'k' : 
     material === 'superliga' ? 's' : '';
+
+    conditionN = condition === 'boa' ? 'boa' : 
+    condition === 'média' ? 'media' : 
+    condition === 'difícil' ? 'dificil' : '';
 
     const insertFiltered = insertArr.filter((el) => {
       return (
         el.material.toLowerCase() === materialN.toLowerCase() 
         && 
-        el.condition.toLowerCase() === processObj.condition.toLowerCase()
+        el.condition.toLowerCase() === conditionN.toLowerCase()
       );
     });
     return insertFiltered;
   }
 
+  //calculates the parameter for each insert based on the geometry and the processObj
   insertCalculator(insertArr:insert[], processObj: process, geometry: geometry):parameters[] {
     const parameters:parameters[] = [
       
@@ -207,7 +195,6 @@ export class StepperComponent {
     return parameters;
   }
 
-  parametersCalculated:parameters[] = this.insertCalculator(this.insertTest, this.configTest, this.geometryTest[1]);
 
   insertFiltrateThenCalculate(insert:insert[], processObj: process, geometry: geometry):[insert, parameters][] {
     const filtratedInserts:insert[] = this.insertFilter(insert, processObj);
@@ -224,23 +211,50 @@ export class StepperComponent {
     return insertsAndParameters;
   }
 
-  
+  testVariable:any;
 
-  clickEvent() {
-    const t = this.insertFiltrateThenCalculate(this.insertTest, this.configTest, this.configTest.productsExternalGeometry[1]);
-    return t;
+  fillGeometriesInsertsAndParameters() {
+    this.process_config.productsExternalGeometry.map((geometry) => {
+      geometry.insertsAndParameters = this.insertFiltrateThenCalculate(
+        this.externalInsertData, this.process_config, geometry);
+    });
+    this.testVariable = this?.process_config?.productsExternalGeometry[0]?.insertsAndParameters
+    console.log(this.testVariable);
+    console.log(this.process_config.condition);
+  }
+
+  unfillGeometrisInsertsAndParameters() {
+    this.process_config.productsExternalGeometry.map((geometry) => {
+      geometry.insertsAndParameters = undefined;
+    })
+    this.testVariable = [];
+    console.log(this.testVariable);
   }
 
   insertsAndParameters = this.insertFilter(this.insertTest, this.configTest);
 
   filtratedAndCalculated!:[insert, parameters][];
+  FaCArray:[insert, parameters][][] = [
 
-  loadInsertsAndParameters():void {
-    this.filtratedAndCalculated = this.insertFiltrateThenCalculate(this.externalInsertData, this.process_config, this.geometryTest[0])
+  ];
+
+  loadInsertsAndParameters(geometries: geometry[]):void {
+    geometries.forEach(geometry => {
+      this.FaCArray.push(this.insertFiltrateThenCalculate(this.externalInsertData, this.process_config, geometry));
+    });
+  }
+
+  resetInsertsAndParameters() {
+    this.FaCArray = [];
   }
 
 
+// 1 - iterar as geometrias
+/*
+  @for (geometry of configTest.productsExternalGeometry; track configTest.productsExternalGeometry) {
 
+  }
+*/
 
   //ABAIXO CÓDIGO LIMPO, ACIMA TESTES
 
@@ -287,6 +301,10 @@ export class StepperComponent {
     {
       return 0
     }
+  }
+
+  addTestGeometry() {
+    this.configTest.productsExternalGeometry.push({start: 0, end: 0, diameter: 0});
   }
 
   /*

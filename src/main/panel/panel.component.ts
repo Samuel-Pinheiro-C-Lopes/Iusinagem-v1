@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { insert } from '../main.component';
-import { parameters } from '../stepper/stepper.component';
+import { geometry, parameters } from '../stepper/stepper.component';
 
 @Component({
   selector: 'app-panel',
@@ -12,7 +12,7 @@ import { parameters } from '../stepper/stepper.component';
   styleUrl: './panel.component.css'
 })
 export class PanelComponent {
-  @Input() relation!:[insert, parameters]
+  @Input() geometry!:geometry
 
 
 }

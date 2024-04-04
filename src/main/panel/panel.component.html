@@ -2,12 +2,102 @@
     <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
         <mat-panel-title>
-            title
+            {{geometry.start}}mm - {{geometry.end}}mm ({{geometry.diameter}}mm)
         </mat-panel-title>
         <mat-panel-description> 
         </mat-panel-description>
         </mat-expansion-panel-header>
-            <p>{{relation[1].rpm}}</p>
-            <p>{{relation[0].material}}</p>
+        <div
+            class="iteration"
+        >
+            @for (ins_pam of geometry.insertsAndParameters; 
+            track geometry.insertsAndParameters) {
+                <div
+                    class="container"
+                >
+                    <h5>Pastilha: {{ins_pam[0].iso}}</h5>
+                    <div
+                        class="insert-container"
+                    >    
+                            <span
+                                class="insert-description"
+                            >
+                                Iso: {{ins_pam[0].iso}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Geometria: {{ins_pam[0].geometry}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Classe: {{ins_pam[0].class}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Velocidade de corte: {{ins_pam[0].vc}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Avanço: {{ins_pam[0].fn}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Profundidade de corte: {{ins_pam[0].ap}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Condição: {{ins_pam[0].condition}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Material: {{ins_pam[0].material}}
+                            </span>
+
+                            <span
+                                class="insert-description"
+                            >
+                                Uso: {{ins_pam[0].machine}}
+                            </span>
+                    </div>
+                    <div
+                        class="insert-container"
+                    >
+                        <span
+                            class="insert-description"
+                        >
+                            RPM: {{ins_pam[1].rpm}}
+                        </span>
+
+                        <span
+                            class="insert-description"
+                        >
+                            Tempo de Usinagem: {{ins_pam[1].machiningTime}}
+                        </span>
+
+                        <span
+                            class="insert-description"
+                        >
+                            Taxa de Remoção: {{ins_pam[1].metalRemotionRate}}
+                        </span>
+                    </div>
+                </div>
+            }
+                        
+        </div>
     </mat-expansion-panel>
 </p>
+<hr />

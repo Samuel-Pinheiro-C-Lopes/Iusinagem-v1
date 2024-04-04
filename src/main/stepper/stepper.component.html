@@ -128,7 +128,7 @@
 
             <mat-divider></mat-divider>
             
-            @if (process_config.productsExternalGeometry?.length) 
+            @if (process_config.productsExternalGeometry.length) 
             {
                 <!-- 
                     ngFor directive with the new syntax from the most recent version of Angular - 17.3.1 -, in the case below, it creates form fields according to parts
@@ -194,7 +194,7 @@
                             <mat-label>Diâmetro Externo</mat-label>
                             <input 
                                 type="number"
-                                [ngModel] = "geometry.diameter"
+                                [(ngModel)] = "geometry.diameter"
                                 matInput 
                                 required 
                             />
@@ -238,7 +238,7 @@
 
             <mat-divider></mat-divider>
 
-            @if (process_config.productsInternalGeometry?.length) 
+            @if (process_config.productsInternalGeometry.length) 
             {
             <!-- 
                 ngFor directive with the new syntax from the most recent version of Angular - 17.3.1 -, in the case below, it creates form fields according to parts
@@ -357,13 +357,13 @@
             (
                 (process_config.preLength && process_config.preDiameter 
                 && process_config.condition && process_config.material && 
-                (process_config.productsExternalGeometry?.length || 
-                process_config.productsInternalGeometry?.length)) 
+                (process_config.productsExternalGeometry.length || 
+                process_config.productsInternalGeometry.length)) 
                 &&
                 ((checkGeometries(process_config.productsExternalGeometry) && 
-                !process_config.productsInternalGeometry?.length) ||
+                !process_config.productsInternalGeometry.length) ||
                 (checkGeometries(process_config.productsInternalGeometry) && 
-                !process_config.productsExternalGeometry?.length) ||
+                !process_config.productsExternalGeometry.length) ||
                 (checkGeometries(process_config.productsExternalGeometry) &&
                 checkGeometries(process_config.productsInternalGeometry)))
             )
@@ -396,39 +396,6 @@
     </mat-stepper>
 </p>
 
-
-<button (click) = "clickEvent()"></button>
-
-@for(insert of filtered; track filtered) {
-    <div>{{insert.condition}}</div>
-    <div>e {{insert.material}}</div>
-}
-<mat-divider></mat-divider>
-@for(parameter of parametersCalculated; track parametersCalculated) {
-    <div>{{parameter.rpm}}</div>
-    <div>e {{parameter.machiningTime}}</div>
-}
-<mat-divider></mat-divider>
-@for(relation of filtratedAndCalculated; track filtratedAndCalculated) {
-    <div>{{relation[1].rpm}}</div>
-    <div>e {{relation[1].machiningTime}}</div>
-}
-<mat-divider></mat-divider>
-@for(geometry of process_config.productsExternalGeometry; track process_config.productsExternalGeometry) {
-    <p>{{geometry.start}} até {{geometry.end}}</p>
-    @for (relation of insertFiltrateThenCalculate(externalInsertData, process_config, geometry); track insertFiltrateThenCalculate(this.insertTest, 
-    this.configTest, this.geometryTest[0])) {
-        <app-panel [relation] = "relation"></app-panel>
-    }
-}
-
-<button
-    class="btn-generate"
-    (click) = "loadInsertsAndParameters()"
->Gerar os componentes</button>
-
-<p>{{filtratedAndCalculated}}</p>
-
 <!-- 
     The problem may be with the lack of a button to call the function once the variable changes 
     
@@ -444,3 +411,34 @@
     4# uma vez que isso seja efetuado, bastará clicar no botão novamente para recarregar o resultado
 
 -->
+
+<button 
+    style="
+        margin: 20px; width: 150px; height: 50px; 
+        border: ridge black 1px; border-radius: 10px; cursor: pointer; font-size: medium; 
+        background-color: brown; color: white;"
+    (click) = "fillGeometriesInsertsAndParameters()"
+>
+    Input
+</button>
+
+<button 
+    style="
+        margin: 20px; margin-left: 50px ;width: 150px; height: 50px; 
+        border: ridge black 1px; border-radius: 10px; cursor: pointer; font-size: medium; 
+        background-color: brown; color: white;"
+    (click) = "unfillGeometrisInsertsAndParameters()"
+>
+    Reset
+</button>
+
+@for (geometry of process_config.productsExternalGeometry; track process_config.productsExternalGeometry; let idx = $index) {
+    <app-panel [geometry] = "geometry"></app-panel>
+}
+
+<!-- 
+    1- Para cada geometria - é um array, vai ocorrer algo a cada objeto 
+    2 - FaCArray é algo como: 
+    [ [ [ins, pam], [ins, pam] ... [ins, pam] ], [ [ins, pam], [ins, pam], ... [ins, pam] ], ... [ [ins, pam], [ins, pam], ... [ins, pam] ] ]
+--> 
+
