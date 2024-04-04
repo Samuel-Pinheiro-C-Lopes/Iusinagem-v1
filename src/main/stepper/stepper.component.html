@@ -2,6 +2,8 @@
     <!-- Mat Stepper component -->
     <mat-stepper
         #stepper
+        [linear] = 'true'
+        (selectionChange)="selectionChange()"
     >
         <!-- First step - enter with the product intendend -->
         <mat-step>
@@ -368,23 +370,10 @@
                 checkGeometries(process_config.productsInternalGeometry)))
             )
             {
-               <div>
-                    <!--
-                        For each geometry there will be certain inserts that will
-                        match the configs inputed by the user about the material.
-
-                    -->
-                    @for (geometry of process_config.productsExternalGeometry; 
-                        track process_config.productsExternalGeometry) {
-                        <div></div>
-                    }
-               </div>
-               <div>
-                    @for (geometry of process_config.productsInternalGeometry; 
-                    track process_config.productsInternalGeometry) {
-                        <div></div>
-                    }
-               </div>
+                <app-tabs
+                    [tabData] = "tabDataCreator(process_config.productsExternalGeometry, 
+                    process_config.productsInternalGeometry)"
+                ></app-tabs>
             }
             @else {
                 <h2>

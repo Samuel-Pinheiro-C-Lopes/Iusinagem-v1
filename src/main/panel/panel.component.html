@@ -12,10 +12,11 @@
         >
             @for (ins_pam of geometry.insertsAndParameters; 
             track geometry.insertsAndParameters) {
+                <mat-divider></mat-divider>
+                <h5>{{$index + 1}}</h5>
                 <div
                     class="container"
                 >
-                    <h5>Pastilha: {{ins_pam[0].iso}}</h5>
                     <div
                         class="insert-container"
                     >    
@@ -31,12 +32,19 @@
                                 Geometria: {{ins_pam[0].geometry}}
                             </span>
 
+
                             <span
                                 class="insert-description"
                             >
                                 Classe: {{ins_pam[0].class}}
                             </span>
 
+                    </div>
+
+                    <div
+                        class="insert-container"
+                    >   
+                            
                             <span
                                 class="insert-description"
                             >
@@ -49,17 +57,23 @@
                                 Avanço: {{ins_pam[0].fn}}
                             </span>
 
+
                             <span
                                 class="insert-description"
                             >
                                 Profundidade de corte: {{ins_pam[0].ap}}
                             </span>
+                    </div>
 
+                    <div
+                        class="insert-container"
+                    >
                             <span
                                 class="insert-description"
                             >
                                 Condição: {{ins_pam[0].condition}}
                             </span>
+
 
                             <span
                                 class="insert-description"
@@ -67,31 +81,33 @@
                                 Material: {{ins_pam[0].material}}
                             </span>
 
+
                             <span
                                 class="insert-description"
                             >
                                 Uso: {{ins_pam[0].machine}}
                             </span>
                     </div>
+                    
                     <div
                         class="insert-container"
                     >
                         <span
                             class="insert-description"
                         >
-                            RPM: {{ins_pam[1].rpm}}
+                            RPM: {{ins_pam[1].rpm.toFixed(2)}}
                         </span>
 
                         <span
                             class="insert-description"
                         >
-                            Tempo de Usinagem: {{ins_pam[1].machiningTime}}
+                            Tempo de Usinagem: {{ins_pam[1].machiningTime.toFixed(2)}}
                         </span>
 
                         <span
                             class="insert-description"
                         >
-                            Taxa de Remoção: {{ins_pam[1].metalRemotionRate}}
+                            Taxa de Remoção: {{ins_pam[1].metalRemotionRate.toFixed(2)}}
                         </span>
                     </div>
                 </div>

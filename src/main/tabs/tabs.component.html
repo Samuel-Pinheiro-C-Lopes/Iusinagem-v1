@@ -1,0 +1,15 @@
+<p>
+    <mat-tab-group>
+        @for (category of tabData; track tabData; let idx = $index) {
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    {{category[0].type}}
+                </ng-template>
+                @for (geometry of category; 
+                track tabData) {
+                    <app-panel [geometry] = "geometry"></app-panel>
+                }        
+            </mat-tab>
+        }
+    </mat-tab-group>
+</p>

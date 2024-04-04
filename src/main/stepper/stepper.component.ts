@@ -14,13 +14,15 @@ import { insert } from '../main.component';
 import { PanelComponent } from '../panel/panel.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
+import { TabsComponent } from '../tabs/tabs.component';
 
 
 export interface geometry {
   start: number;
   end: number;
   diameter: number;
-  insertsAndParameters?: [insert, parameters][]
+  insertsAndParameters?: [insert, parameters][];
+  type: string;
 }
 
 export interface process {
@@ -56,6 +58,7 @@ export interface parameters {
     PanelComponent,
     MatExpansionModule,
     CommonModule,
+    TabsComponent
   ],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'
@@ -78,11 +81,11 @@ export class StepperComponent {
     material: 'aço',
     productsExternalGeometry: [
       {
-        start: 0, end: 10, diameter: 20, 
+        start: 0, end: 10, diameter: 20, type: 'externo'
       },
   
       {
-        start: 10, end: 30, diameter: 40, 
+        start: 10, end: 30, diameter: 40, type: 'externo'
       },
     ],
     productsInternalGeometry: [
@@ -106,15 +109,15 @@ export class StepperComponent {
 
   geometryTest:geometry[] = [
     {
-      start: 0, end: 10, diameter: 20, 
+      start: 0, end: 10, diameter: 20, type:'externo'
     },
 
     {
-      start: 10, end: 30, diameter: 40, 
+      start: 10, end: 30, diameter: 40, type:'externo'
     },
 
     {
-      start: 30, end: 100, diameter: 50, 
+      start: 30, end: 100, diameter: 50, type:'externo'
     },
   ];
 
@@ -219,8 +222,6 @@ export class StepperComponent {
         this.externalInsertData, this.process_config, geometry);
     });
     this.testVariable = this?.process_config?.productsExternalGeometry[0]?.insertsAndParameters
-    console.log(this.testVariable);
-    console.log(this.process_config.condition);
   }
 
   unfillGeometrisInsertsAndParameters() {
@@ -228,7 +229,6 @@ export class StepperComponent {
       geometry.insertsAndParameters = undefined;
     })
     this.testVariable = [];
-    console.log(this.testVariable);
   }
 
   insertsAndParameters = this.insertFilter(this.insertTest, this.configTest);
@@ -246,6 +246,21 @@ export class StepperComponent {
 
   resetInsertsAndParameters() {
     this.FaCArray = [];
+  }
+
+  tabDataCreator(...geometriesArr: geometry[][]):geometry[][] {
+    const filteredArr = geometriesArr.filter((el) => {
+      return el.filter((el) => {
+        el.end != 0 && el.diameter != 0 && el.insertsAndParameters
+      }) && el.length;
+    })
+    console.log(geometriesArr);
+    return filteredArr;
+  };
+
+  selectionChange() {
+    this.unfillGeometrisInsertsAndParameters();
+    this.fillGeometriesInsertsAndParameters();
   }
 
 
@@ -289,22 +304,18 @@ export class StepperComponent {
   addNewGeometry(type: string):number {
     if (type === "external") 
     {
-      this.process_config.productsExternalGeometry?.push({start: 0, end: 0, diameter: 0});
+      this.process_config.productsExternalGeometry?.push({start: 0, end: 0, diameter: 0, type: "externo"});
       return 1;
     }
     else if (type === "internal")
     {
-      this.process_config.productsInternalGeometry?.push({start: 0, end: 0, diameter: 0});
+      this.process_config.productsInternalGeometry?.push({start: 0, end: 0, diameter: 0, type: "interno"});
       return 1;
     } 
     else
     {
       return 0
     }
-  }
-
-  addTestGeometry() {
-    this.configTest.productsExternalGeometry.push({start: 0, end: 0, diameter: 0});
   }
 
   /*
