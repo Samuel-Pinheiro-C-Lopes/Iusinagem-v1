@@ -35,96 +35,358 @@ export class AppMainComponent {
 
   //data for the external machining inserts - Sandvik Coromant
 external:insert[] = [
-  //T-Max para aços - pág 18 -> 20
+  //T-Max - pág 18 -> 20
 
-    //boas condições
-    {
-      iso: "CCMT 06 02 02", geometry: "PF", class: 4325, vc: 495, fn: 0.06, ap: 0.25, 
-      material: "p", condition: "Boa", operation: 'acabamento', machine: "T-Max"},
+    //OPERAÇÕES DE ACABAMENTO***
+
+     //Aços******
+
+      //boas condições******
+      {
+        iso: "CNMG 12 04 04", geometry: "PF", class: 4315, vc: 530, fn: 0.15, ap: 0.40, 
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "PF", class: 4315, vc: 530, fn: 0.15, ap: 0.40, 
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //medias condições******
+      {
+        iso: "CNMG 12 04 04", geometry: "PF", class: 4325, vc: 440, fn: 0.20, ap: 0.40, 
+        material: "p", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "PF", class: 4325, vc: 440, fn: 0.15, ap: 0.40, 
+        material: "p", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //difíceis condições******
+      {
+        iso: "CNMG 12 04 04", geometry: "PM", class: 4335, vc: 250, fn: 0.20, ap: 3.00, 
+        material: "p", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "PM", class: 4335, vc: 250, fn: 0.20, ap: 3.00, 
+        material: "p", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+     //Aços Inoxidáveis*****
+
+      //boas condições*****
+      {
+        iso: "CNMG 12 04 04", geometry: "MF", class: 2015, vc: 275, fn: 0.15, ap: 0.40, 
+        material: "m", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "MF", class: 2015, vc: 275, fn: 0.15, ap: 0.40, 
+        material: "m", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //medias condições*****
+      {
+        iso: "CNMG 12 04 04", geometry: "MF", class: 2220, vc: 255, fn: 0.15, ap: 0.40, 
+        material: "m", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "MF", class: 2220, vc: 225, fn: 0.15, ap: 0.40, 
+        material: "m", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //difíceis condições*****
+      {
+        iso: "CNMG 12 04 04", geometry: "MF", class: 2025, vc: 215, fn: 0.15, ap: 0.40, 
+        material: "m", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "MF", class: 2025, vc: 215, fn: 0.15, ap: 0.40, 
+        material: "m", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+     //Ferro fundido********
+
+      //boas condições********
+      {
+        iso: "CNMG 12 04 04", geometry: "KF", class: 3210, vc: 345, fn: 0.15, ap: 0.50, 
+        material: "k", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "KF", class: 3210, vc: 345, fn: 0.15, ap: 0.50, 
+        material: "k", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //médias condições ****
+      {
+        iso: "CNMG 12 04 04", geometry: "KF", class: 3225, vc: 235, fn: 0.15, ap: 0.50, 
+        material: "k", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "KF", class: 3225, vc: 235, fn: 0.15, ap: 0.50, 
+        material: "k", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //difíceis condições ****
+      {
+        iso: "CNMG 12 04 04", geometry: "KF", class: 3225, vc: 235, fn: 0.15, ap: 0.50, 
+        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "KF", class: 3225, vc: 235, fn: 0.15, ap: 0.50, 
+        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+     //superligas******
+
+      //boas condições********
+      {
+        iso: "CNMG 12 04 04", geometry: "SF", class: 1105, vc: 80, fn: 0.12, ap: 0.40, 
+        material: "k", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "SF", class: 1105, vc: 80, fn: 0.12, ap: 0.40, 
+        material: "k", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //médias condições********
+      {
+        iso: "CNMG 12 04 04", geometry: "SF", class: 1115, vc: 65, fn: 0.12, ap: 0.40, 
+        material: "k", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "SF", class: 1115, vc: 65, fn: 0.12, ap: 0.40, 
+        material: "k", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      //difíceis condições********
+      {
+        iso: "CNMG 12 04 04", geometry: "SF", class: 1125, vc: 35, fn: 0.12, ap: 0.40, 
+        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "SF", class: 1125, vc: 35, fn: 0.12, ap: 0.40, 
+        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+      },
+
+    //OPERAÇÕES MÉDIAS*****
+    
+     //Aço******
+
+      //boas condições******
+      {
+        iso: "CNMG 12 04 04", geometry: "PM", class: 4315, vc: 490, fn: 0.20, ap: 3.00, 
+        material: "p", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "PM", class: 4315, vc: 430, fn: 0.30, ap: 2.50, 
+        material: "p", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      //médias condições******
+      {
+        iso: "CNMG 12 04 04", geometry: "PM", class: 4325, vc: 0.20, fn: 0.20, ap: 3.00, 
+        material: "p", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "PM", class: 4325, vc: 355, fn: 0.30, ap: 3.00, 
+        material: "p", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      //difíceis condições******
+      {
+        iso: "CNMG 12 04 04", geometry: "PM", class: 4335, vc: 250, fn: 0.20, ap: 3.00, 
+        material: "p", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "PM", class: 4325, vc: 355, fn: 0.30, ap: 3.00, 
+        material: "p", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+    
+    //Aço Inoxidável****
+
+      //boas condições********
+      {
+        iso: "CNMG 12 04 08", geometry: "MM", class: 2220, vc: 210, fn: 0.25, ap: 3.00, 
+        material: "m", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "MM", class: 2220, vc: 210, fn: 0.25, ap: 3.00, 
+        material: "m", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      //médias condições********
+      {
+        iso: "CNMG 12 04 08", geometry: "MM", class: 2025, vc: 180, fn: 0.25, ap: 3.00, 
+        material: "m", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "MM", class: 2025, vc: 180, fn: 0.25, ap: 3.00, 
+        material: "m", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      //difíceis condições********
+      {
+        iso: "CNMG 12 04 08", geometry: "MM", class: 2035, vc: 160, fn: 0.25, ap: 3.00, 
+        material: "m", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "MM", class: 2035, vc: 160, fn: 0.25, ap: 3.00, 
+        material: "m", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+
+    //Ferro fundido******
+
+      //boas condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 3.00, 
+        material: "k", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 2.50, 
+        material: "k", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      //médias condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 3.00, 
+        material: "k", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 2.50, 
+        material: "k", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      //difíceis condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "KM", class: 3225, vc: 190, fn: 0.35, ap: 3.00, 
+        material: "k", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "KM", class: 3225, vc: 190, fn: 0.35, ap: 2.50, 
+        material: "k", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+
+    //Superliga******
+
+      //boas condições********
+      {
+        iso: "CNMG 12 04 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 3.00, 
+        material: "k", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 2.50, 
+        material: "k", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+      
+      
+      
 ];
 
   //data for the internal machining
   internal:insert[] = [
    //Coroturn107 para aços - pág 11 -> 13****
 
-   // ACABAMENTO***
+    // ACABAMENTO***
       //boas condições****
       {
         iso: "CCMT 06 02 02", geometry: "PF", class: 4325, vc: 495, fn: 0.06, ap: 0.25, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "CCMT 09 T3 02", geometry: "PF", class: 4325, vc: 485, fn: 0.08, ap: 0.25, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"},
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
+      },
 
       {
         iso: "CCMT 09 T3 08", geometry: "PF", class: 4315, vc: 530, fn: 0.15, ap: 0.40, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"},
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"},
 
       {
         iso: "DCMT 07 02 02", geometry: "PF", class: 4325, vc: 495, fn: 0.06, ap: 0.25, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"},
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"},
 
       {
         iso: "DCMT 11 T3 02", geometry: "PF", class: 4325, vc: 485, fn: 0.08, ap: 0.25, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "PF", class: 4315, vc: 530, fn: 0.15, ap: 0.40, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 09 02 02", geometry: "PF", class: 4325, vc: 495, fn: 0.06, ap: 0.25, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 02", geometry: "PF", class: 4325, vc: 490, fn: 0.07, ap: 0.25, 
-        material: "p", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
       
       {
         iso: "TCMT 11 03 08", geometry: "PF", class: 4315, vc: 550, fn: 0.13, ap: 0.40, 
-        material: "p", condition: "Boa", operation: '', machine: "Coroturn 107"
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "CCMT 06 02 08", geometry: "PM", class: 4315, vc: 560, fn: 0.11, ap: 1.20, 
-        material: "p", condition: "Boa", operation: '', machine: "Coroturn 107"
+        material: "p", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       //médias condições*****
       {
-        iso: "CCMT 09 T3 08", geometry: "PF", class: 4325, vc: 440, fn: 0.15, ap: 0.40, material: "p", condition: "Media", operation: '', machine: "Coroturn 107"
+        iso: "CCMT 09 T3 08", geometry: "PF", class: 4325, vc: 440, fn: 0.15, ap: 0.40, 
+        material: "p", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "PF", class: 4325, vc: 440, fn: 0.15, ap: 0.40, 
-        material: "p", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "PF", class: 4325, vc: 450, fn: 0.13, ap: 0.40, 
-        material: "p", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       //difíceis condições****
       {
         iso: "CCMT 09 T3 08", geometry: "PM", class: 4335, vc: 250, fn: 0.20, ap: 1.70, 
-        material: "p", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "PM", class: 4335, vc: 250, fn: 0.20, ap: 1.70, 
-        material: "p", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "Pm", class: 4335, vc: 265, fn: 0.17, ap: 1.20, 
-        material: "p", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "p", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
      //Coroturn107 para aços inóx - pág 11 -> 13*****
@@ -132,49 +394,49 @@ external:insert[] = [
       //boas condições****
       {
         iso: "CCMT 09 T3 08", geometry: "MF", class: 2015, vc: 275, fn: 0.15, ap: 0.40, 
-        material: "m", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "MF", class: 2015, vc: 275, fn: 0.15, ap: 0.40, 
-        material: "m", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "MF", class: 2015, vc: 285, fn: 0.13, ap: 0.40, 
-        material: "m", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
   
       //médias condições*****
       {
         iso: "CCMT 09 T3 08", geometry: "MF", class: 2220, vc: 255, fn: 0.15, ap: 0.40, 
-        material: "m", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "MF", class: 2220, vc: 255, fn: 0.15, ap: 0.40, 
-        material: "m", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "MF", class: 1115, vc: 235, fn: 0.13, ap: 0.40, 
-        material: "m", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
   
       //difíceis condições****
       {
         iso: "CCMT 09 T3 08", geometry: "MM", class: 2025, vc: 195, fn: 0.20, ap: 1.70, 
-        material: "m", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "MM", class: 2025, vc: 195, fn: 0.20, ap: 1.70, 
-        material: "m", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "MM", class: 2015, vc: 265, fn: 0.17, ap: 1.20, 
-        material: "m", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "m", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
     //Coroturn107 para ferro fundido - pág 11 -> 13*****
@@ -182,49 +444,49 @@ external:insert[] = [
       //boas condições*****
       {
         iso: "CCMT 09 T3 08", geometry: "KF", class: 3210, vc: 360, fn: 0.11, ap: 0.30, 
-        material: "k", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "KF", class: 3210, vc: 345, fn: 0.15, ap: 0.40, 
-        material: "k", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "KF", class: 3210, vc: 355, fn: 0.13, ap: 0.40, 
-        material: "k", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       //médias condições*****
       {
         iso: "CCMT 09 T3 08", geometry: "KF", class: 3225, vc: 235, fn: 0.15, ap: 0.40, 
-        material: "k", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "KF", class: 3225, vc: 235, fn: 0.15, ap: 0.40, 
-        material: "k", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "KF", class: 3225, vc: 240, fn: 0.13, ap: 0.40, 
-        material: "k", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       //difíceis condições*****
       {
         iso: "CCMT 09 T3 08", geometry: "KM", class: 3225, vc: 225, fn: 0.20, ap: 1.70, 
-        material: "k", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCMT 11 T3 08", geometry: "KM", class: 3225, vc: 225, fn: 0.20, ap: 1.70, 
-        material: "k", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCMT 11 03 08", geometry: "KM", class: 3225, vc: 230, fn: 0.17, ap: 1.20, 
-        material: "k", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
     
     //Coroturn107 para superliga*****
@@ -232,49 +494,49 @@ external:insert[] = [
       //boas condições*****
       {
         iso: "CCGT 09 T3 08", geometry: "UM", class: 1105, vc: 80, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"},
+        material: "s", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"},
 
 
       {
         iso: "DCGT 11 T3 08", geometry: "UM", class: 1105, vc: 80, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"},
+        material: "s", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"},
 
 
       {
         iso: "TCGT 11 03 08", geometry: "UM", class: 1115, vc: 65, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Boa", operation: 'acabamento', machine: "Coroturn 107"},
+        material: "s", condition: "Boa", operation: 'Acabamento', machine: "Coroturn 107"},
 
         
       //médias condições*****
       {
         iso: "CCGT 09 T3 08", geometry: "UM", class: 1105, vc: 65, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"}
+        material: "s", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"}
         ,
 
       {
         iso: "DCGT 11 T3 08", geometry: "UM", class: 1105, vc: 65, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"}
+        material: "s", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"}
         ,
 
       {
         iso: "TCGT 11 03 08", geometry: "UM", class: 1115, vc: 65, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Media", operation: 'acabamento', machine: "Coroturn 107"}
+        material: "s", condition: "Media", operation: 'Acabamento', machine: "Coroturn 107"}
         ,
   
       //difíceis condições*****
       {
         iso: "CCGT 09 T3 08", geometry: "UM", class: 1125, vc: 35, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "s", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "DCGT 11 T3 08", geometry: "UM", class: 1125, vc: 35, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "s", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
 
       {
         iso: "TCGT 11 03 08", geometry: "UM", class: 1125, vc: 35, fn: 0.14, ap: 1.25, 
-        material: "s", condition: "Dificil", operation: 'acabamento', machine: "Coroturn 107"
+        material: "s", condition: "Dificil", operation: 'Acabamento', machine: "Coroturn 107"
       },
     
   //OPERAÇÃO MÉDIA********
@@ -541,13 +803,13 @@ external:insert[] = [
 
         //condições médias *******
         {
-          iso: "CCMT 06 02 04", geometry: "MM", class: 1105, vc: 80, fn: 0.08, ap: 0.70, 
-          material: "s", condition: "Boa", operation: 'Desbaste', machine: "Coroturn 107"
+          iso: "CCMT 06 02 04", geometry: "MM", class: 1115, vc: 65, fn: 0.08, ap: 0.70, 
+          material: "s", condition: "Media", operation: 'Desbaste', machine: "Coroturn 107"
         },
 
         {
-          iso: "DCMT 07 02 04", geometry: "MM", class: 1105, vc: 80.0, fn: 0.08, ap: 0.70, 
-          material: "s", condition: "Boa", operation: 'Desbaste', machine: "Coroturn 107"
+          iso: "DCMT 07 02 04", geometry: "MM", class: 1115, vc: 65, fn: 0.08, ap: 0.70, 
+          material: "s", condition: "Media", operation: 'Desbaste', machine: "Coroturn 107"
         },
 
   
