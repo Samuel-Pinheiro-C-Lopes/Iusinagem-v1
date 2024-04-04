@@ -531,12 +531,12 @@ external:insert[] = [
         //condições boas *******
         {
           iso: "CCMT 06 02 04", geometry: "MM", class: 1105, vc: 80, fn: 0.08, ap: 0.70, 
-          material: "S", condition: "Boa", operation: 'Desbaste', machine: "Coroturn 107"
+          material: "s", condition: "Boa", operation: 'Desbaste', machine: "Coroturn 107"
         },
 
         {
           iso: "DCMT 07 02 04", geometry: "MM", class: 1105, vc: 80, fn: 0.08, ap: 0.70, 
-          material: "S", condition: "Boa", operation: 'Desbaste', machine: "Coroturn 107"
+          material: "s", condition: "Boa", operation: 'Desbaste', machine: "Coroturn 107"
         },
 
   
