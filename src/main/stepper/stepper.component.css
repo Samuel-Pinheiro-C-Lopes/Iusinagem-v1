@@ -73,23 +73,3 @@ The font-size increases, incresing it's size
     font-size: 25px;
 }
 
-h2 {
-    text-align: center;
-    font-size: large;
-    margin-top: 20px;
-}
-
-
-.btn-generate {
-    background-color: green; color: white; border-radius: 4px; 
-    width: 180px; height: 35px; border: 2px solid green;
-    transition: all 1s; font-size: medium;
-}
-
-.btn-generate:hover {
-    width: 200px;
-    height: 45px;
-    font-size: larger;
-    cursor: pointer;
-    border-radius: 15px;
-}

@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepperModule, StepperOrientation } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +15,9 @@ import { PanelComponent } from '../panel/panel.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 import { TabsComponent } from '../tabs/tabs.component';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 
 export interface geometry {
@@ -59,11 +62,22 @@ export interface parameters {
     MatExpansionModule,
     CommonModule,
     TabsComponent
+    
   ],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'
 })
 export class StepperComponent {
+
+  stepperOrientation: Observable<StepperOrientation>;
+
+  constructor(
+    breakpointObserver: BreakpointObserver,
+  ) {
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
+  }
 
 
   /*
@@ -118,38 +132,6 @@ export class StepperComponent {
 
     {
       start: 30, end: 100, diameter: 50, type:'externo'
-    },
-  ];
-
-  insertTest:insert[] = [
-    {
-      iso: "CCMT 06 02 02", geometry: "PF", class: 4325, vc: 495, fn: 0.06, 
-      ap: 0.25, material: "p", condition: "Boa", machine: "Coroturn 107"
-    },
-
-    {
-      iso: "CCMT 06 08 02", geometry: "PF", class: 4225, vc: 595, fn: 0.16, 
-      ap: 0.25, material: "p", condition: "Boa", machine: "Coroturn 107"
-    },
-
-    {
-      iso: "CCMT 06 04 02", geometry: "PF", class: 4125, vc: 795, fn: 0.6, 
-      ap: 0.25, material: "m", condition: "Boa", machine: "Coroturn 107"
-    },
-
-    {
-      iso: "DCMT 11 T3 08", geometry: "MF", class: 2015, vc: 275, fn: 0.15, 
-      ap: 0.40, material: "m", condition: "Boa", machine: "Coroturn 107"
-    },
-
-    {
-      iso: "TCMT 11 03 08", geometry: "KF", class: 3225, vc: 240, fn: 0.13, 
-      ap: 0.40, material: "k", condition: "Media", machine: "Coroturn 107"
-    },
-
-    {
-      iso: "TCMT 11 03 08", geometry: "KF", class: 5225, vc: 540, fn: 1.3, 
-      ap: 4.40, material: "k", condition: "Media", machine: "Coroturn 107"
     },
   ];
 
@@ -221,17 +203,25 @@ export class StepperComponent {
       geometry.insertsAndParameters = this.insertFiltrateThenCalculate(
         this.externalInsertData, this.process_config, geometry);
     });
+
+    this.process_config.productsInternalGeometry.map((geometry) => {
+      geometry.insertsAndParameters = this.insertFiltrateThenCalculate(
+        this.internalInsertData, this.process_config, geometry);
+    });
     this.testVariable = this?.process_config?.productsExternalGeometry[0]?.insertsAndParameters
   }
 
   unfillGeometrisInsertsAndParameters() {
     this.process_config.productsExternalGeometry.map((geometry) => {
       geometry.insertsAndParameters = undefined;
-    })
+    });
+
+    this.process_config.productsInternalGeometry.map((geometry) => {
+      geometry.insertsAndParameters = undefined;
+    });
+
     this.testVariable = [];
   }
-
-  insertsAndParameters = this.insertFilter(this.insertTest, this.configTest);
 
   filtratedAndCalculated!:[insert, parameters][];
   FaCArray:[insert, parameters][][] = [
@@ -274,6 +264,8 @@ export class StepperComponent {
   //ABAIXO CÓDIGO LIMPO, ACIMA TESTES
 
   @Input() externalInsertData!:insert[];
+
+  @Input() internalInsertData!:insert[];
 
   //available elements
   elements:string[] = [

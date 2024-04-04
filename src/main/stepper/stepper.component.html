@@ -4,6 +4,7 @@
         #stepper
         [linear] = 'true'
         (selectionChange)="selectionChange()"
+        [orientation]="(stepperOrientation | async)!"
     >
         <!-- First step - enter with the product intendend -->
         <mat-step>
@@ -400,31 +401,6 @@
     4# uma vez que isso seja efetuado, bastará clicar no botão novamente para recarregar o resultado
 
 -->
-
-<button 
-    style="
-        margin: 20px; width: 150px; height: 50px; 
-        border: ridge black 1px; border-radius: 10px; cursor: pointer; font-size: medium; 
-        background-color: brown; color: white;"
-    (click) = "fillGeometriesInsertsAndParameters()"
->
-    Input
-</button>
-
-<button 
-    style="
-        margin: 20px; margin-left: 50px ;width: 150px; height: 50px; 
-        border: ridge black 1px; border-radius: 10px; cursor: pointer; font-size: medium; 
-        background-color: brown; color: white;"
-    (click) = "unfillGeometrisInsertsAndParameters()"
->
-    Reset
-</button>
-
-@for (geometry of process_config.productsExternalGeometry; track process_config.productsExternalGeometry; let idx = $index) {
-    <app-panel [geometry] = "geometry"></app-panel>
-}
-
 <!-- 
     1- Para cada geometria - é um array, vai ocorrer algo a cada objeto 
     2 - FaCArray é algo como: 
