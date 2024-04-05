@@ -2,9 +2,21 @@
     class="main"
 >
     <h1>Main</h1>
+
+    <app-carousel></app-carousel>
+    <h2
+        class="catalog-title"
+    >
+        Pastilhas para Torneamento Interno
+    </h2>
     <!-- First Catalog component, with the internal insert data -->
     <app-catalog [data] = "internal"></app-catalog>
     <mat-divider></mat-divider>
+    <h2
+        class="catalog-title"
+    >
+        Pastilhas para Torneamento Externo
+    </h2>
     <!-- Second Catalog component, with the external insert data -->
     <app-catalog [data] = "external"></app-catalog>
     <mat-divider></mat-divider>

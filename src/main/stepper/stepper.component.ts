@@ -401,7 +401,6 @@ export class StepperComponent {
         el.end != 0 &&  el.insertsAndParameters
       }) && el.length;
     })
-    console.log('Geometries arr: ', geometriesArr);
     return filteredArr;
   };
 

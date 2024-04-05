@@ -5,6 +5,7 @@ import { MatDivider } from '@angular/material/divider';
 
 import { StepperComponent } from './stepper/stepper.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 /*
 data type for the inserts arrays that will be treated by the application
@@ -27,7 +28,7 @@ export interface insert {
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [StepperComponent, CatalogComponent, MatDivider],
+  imports: [StepperComponent, CatalogComponent, MatDivider, CarouselComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })

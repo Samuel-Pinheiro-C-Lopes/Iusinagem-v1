@@ -1,69 +1,81 @@
 
-<!--
-  Table empowered by mat-table module from the Angular Material that receives
-  the dataSource - of inserts[] type - and displays it in columns and rows
-  according to it's behavior
--->
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #insertTable>
-
-  <!-- Iso column, displays all the iso data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="iso">
-    <th mat-header-cell *matHeaderCellDef> Iso </th>
-    <td mat-cell *matCellDef="let insert"> {{insert.iso}} </td>
-  </ng-container>
-
-  <!-- Geometry column, displays all the geometry - like PR, SMR, ... - data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="geometry">
-    <th mat-header-cell *matHeaderCellDef> Geometria </th>
-    <td mat-cell *matCellDef="let insert"> {{insert.geometry}} </td>
-  </ng-container>
-
-  <!-- Class column, displays all the class data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="class">
-    <th mat-header-cell *matHeaderCellDef> Classe </th>
-    <td mat-cell *matCellDef="let insert"> {{insert.class}} </td>
-  </ng-container>
-
-  <!-- Vc column, displays all the Vc data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="vc">
-    <th mat-header-cell *matHeaderCellDef> Vc </th>
-    <td mat-cell *matCellDef="let insert"> {{insert.vc}} m/min</td>
-  </ng-container>
-
-  <!-- Fn column, displays all the Fn data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="fn">
-      <th mat-header-cell *matHeaderCellDef> Fn </th>
-      <td mat-cell *matCellDef="let insert"> {{insert.fn}} mm/r</td>
-  </ng-container>
-
-  <!-- Ap column, displays all the Ap data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="ap">
-      <th mat-header-cell *matHeaderCellDef> Ap </th>
-      <td mat-cell *matCellDef="let insert"> {{insert.ap}} mm</td>
-  </ng-container>
-
-  <!-- Material column, displays all the Material data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="material">
-      <th mat-header-cell *matHeaderCellDef> Material </th>
-      <td mat-cell *matCellDef="let insert"> {{insert.material}} </td>
-  </ng-container>
-
-  <!-- Condition column, displays all the Condition data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="condition">
-      <th mat-header-cell *matHeaderCellDef> Condição </th>
-      <td mat-cell *matCellDef="let insert"> {{insert.condition}} </td>
-  </ng-container>
-
-  <!-- Use column, displays all the Use data contained in each of the inserts in the array inputed -->
-  <ng-container matColumnDef="machine">
-      <th mat-header-cell *matHeaderCellDef> Uso </th>
-      <td mat-cell *matCellDef="let insert"> {{insert.machine}}®</td>
-  </ng-container>
-
   <!--
-    operates the headers based on the displayedColumns variable and iterates each row according
-    to the containers above
+    Table empowered by mat-table module from the Angular Material that receives
+    the dataSource - of inserts[] type - and displays it in columns and rows
+    according to it's behavior
   -->
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  <table mat-table [dataSource]="dataSource" #insertTable>
+
+    <!-- Iso column, displays all the iso data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="forma">
+      <th mat-header-cell *matHeaderCellDef> Forma </th>
+      <td mat-cell *matCellDef="let insert"> <img [src] = "insert.forma" alt="" class="table-insert"> </td>
+    </ng-container>
+
+    <!-- Iso column, displays all the iso data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="iso">
+      <th mat-header-cell *matHeaderCellDef> Iso </th>
+      <td mat-cell *matCellDef="let insert"> {{insert.iso}} </td>
+    </ng-container>
+
+    <!-- Geometry column, displays all the geometry - like PR, SMR, ... - data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="geometry">
+      <th mat-header-cell *matHeaderCellDef> Geometria </th>
+      <td mat-cell *matCellDef="let insert"> {{insert.geometry}} </td>
+    </ng-container>
+
+    <!-- Class column, displays all the class data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="class">
+      <th mat-header-cell *matHeaderCellDef> Classe </th>
+      <td mat-cell *matCellDef="let insert"> {{insert.class}} </td>
+    </ng-container>
+
+    <!-- Vc column, displays all the Vc data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="vc">
+      <th mat-header-cell *matHeaderCellDef> Vc </th>
+      <td mat-cell *matCellDef="let insert"> {{insert.vc.toFixed(2)}} m/min</td>
+    </ng-container>
+
+    <!-- Fn column, displays all the Fn data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="fn">
+        <th mat-header-cell *matHeaderCellDef> Fn </th>
+        <td mat-cell *matCellDef="let insert"> {{insert.fn.toFixed(2)}} mm/r</td>
+    </ng-container>
+
+    <!-- Ap column, displays all the Ap data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="ap">
+        <th mat-header-cell *matHeaderCellDef> Ap </th>
+        <td mat-cell *matCellDef="let insert"> {{insert.ap.toFixed(2)}} mm</td>
+    </ng-container>
+
+    <!-- Material column, displays all the Material data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="material">
+        <th mat-header-cell *matHeaderCellDef> Material </th>
+        <td mat-cell *matCellDef="let insert"> {{insert.material}} </td>
+    </ng-container>
+
+    <!-- Condition column, displays all the Condition data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="condition">
+        <th mat-header-cell *matHeaderCellDef> Condição </th>
+        <td mat-cell *matCellDef="let insert"> {{insert.condition}} </td>
+    </ng-container>
+
+    <!-- Use column, displays all the Use data contained in each of the inserts in the array inputed -->
+    <ng-container matColumnDef="machine">
+        <th mat-header-cell *matHeaderCellDef> Uso </th>
+        <td mat-cell *matCellDef="let insert"> {{insert.machine}}®</td>
+    </ng-container>
+
+    <!--
+      operates the headers based on the displayedColumns variable and iterates each row according
+      to the containers above
+    -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator 
+    [pageSize]="10"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements">
+  </mat-paginator>

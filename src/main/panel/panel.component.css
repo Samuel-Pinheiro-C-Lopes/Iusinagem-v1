@@ -9,6 +9,13 @@ It makes the title centered
     justify-content: center;
 }
 
+.out-tracer {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
 /*
 Container with display flex and nowrap
 setted in the flex-wrap property - that, by
@@ -19,8 +26,16 @@ and shall occupy only one line
 .container {
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
+    width: 70%;
     height: fit-content;
+    align-items: center;
+}
+
+.img-container {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*
@@ -35,7 +50,7 @@ space equally without wrapping
 .data-container {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 15px;
+    height: 160px;
 }
 
 /*
@@ -54,13 +69,27 @@ each data container that goes beyond
 the determined height
 */
 .iteration {
-    height: 150px;
+    height: 300px;
     overflow-y: auto;
+    margin-bottom: 30px;
 }
 
 /*
 h5 margin 
 */
-h5 {
-    margin: 2px;
+h3 {
+    margin-top: 10px;
+    width: fit-content;
+}
+
+.insertImg {
+    width: 90px;
+    height: 90px;
+    transition: all 1s;
+    vertical-align: middle;
+}
+
+.insertImg:hover {
+    width: 120px;
+    height: 120px;
 }

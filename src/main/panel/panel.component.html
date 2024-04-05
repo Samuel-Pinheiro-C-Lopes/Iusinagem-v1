@@ -34,123 +34,138 @@
             -->
             @for (ins_pam of geometry.insertsAndParameters; 
             track geometry.insertsAndParameters) {
-                <mat-divider></mat-divider>
+
                 <!-- It will display the number of the iteration -->
-                <h5>{{$index + 1}}</h5>
 
-                <!-- Container with each space with data -->
+                <mat-divider></mat-divider>
+
+                <h3>{{$index + 1}}.</h3>
+
                 <div
-                    class="container"
+                    class="out-tracer"
                 >
-                    <!--
-                        Data space, designed in the css
-                        to contain 3 data-description 
-                        elements
-                    -->
                     <div
-                        class="data-container"
-                    >    
-                            <!-- Data description with the Iso -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Iso:</strong> {{ins_pam[0].iso}}
-                            </span>
-
-                            <!-- Data description with the Geometry -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Geometria: </strong>{{ins_pam[0].geometry}}
-                            </span>
-
-                            <!-- Data description with the Class -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Classe: </strong>{{ins_pam[0].class}}
-                            </span>
-
-                    </div>
-
-                    <!-- Container with each space with data -->
-                    <div
-                        class="data-container"
-                    >   
-
-                            <!-- Data description with the Vc -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Velocidade de corte: </strong>{{ins_pam[0].vc.toFixed(2)}} m/min
-                            </span>
-
-                            <!-- Data description with the Fn -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Avanço: </strong>{{ins_pam[0].fn.toFixed(2)}} mm/r
-                            </span>
-
-                            <!-- Data description with the Ap -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Profundidade de corte: </strong>{{ins_pam[0].ap.toFixed(2)}} mm
-                            </span>
-                    </div>
-
-                    <!-- Container with each space with data -->
-                    <div
-                        class="data-container"
+                        class="img-container"
                     >
-                            <!-- Data description with the Condition -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Condição: </strong>{{ins_pam[0].condition}}
-                            </span>
-
-                            <!-- Data description with the Material -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Material: </strong>{{ins_pam[0].material}}
-                            </span>
-
-                            <!-- Data description with the Iso -->
-                            <span
-                                class="data-description"
-                            >
-                                <strong>Uso: </strong>{{ins_pam[0].machine}}®
-                            </span>
+                        <img [src] = "getInsertImg(ins_pam[0].iso)" alt="" class="insertImg">
                     </div>
-                    
+
                     <!-- Container with each space with data -->
                     <div
-                        class="data-container"
+                        class="container"
                     >
-                        <!-- Data description with the RPM -->
-                        <span
-                            class="data-description"
-                        >
-                            <strong>RPM: </strong>{{ins_pam[1].rpm.toFixed(2)}} r/min
-                        </span>
+                        <!--
+                            Data space, designed in the css
+                            to contain 3 data-description 
+                            elements
+                        -->
+                        <div
+                            class="data-container"
+                        >    
+                                <!-- Data description with the Iso -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Iso:</strong> {{ins_pam[0].iso}}
+                                </span>
 
-                        <!-- Data description with the Machining Time -->
-                        <span
-                            class="data-description"
-                        >
-                            <strong>Tempo de Usinagem: </strong>{{ins_pam[1].machiningTime.toFixed(2)}} min
-                        </span>
+                                <!-- Data description with the Geometry -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Geometria: </strong>{{ins_pam[0].geometry}}
+                                </span>
 
-                        <!-- Data description with the Metal Remotion Rate -->
-                        <span
-                            class="data-description"
+                                <!-- Data description with the Class -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Classe: </strong>{{ins_pam[0].class}}
+                                </span>
+
+                        </div>
+
+                        <!-- Container with each space with data -->
+                        <div
+                            class="data-container"
+                        >   
+
+                                <!-- Data description with the Vc -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Velocidade de corte: </strong>{{ins_pam[0].vc.toFixed(2)}} m/min
+                                </span>
+
+                                <!-- Data description with the Fn -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Avanço: </strong>{{ins_pam[0].fn.toFixed(2)}} mm/r
+                                </span>
+
+                                <!-- Data description with the Ap -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Profundidade de corte: </strong>{{ins_pam[0].ap.toFixed(2)}} mm
+                                </span>
+                        </div>
+
+                        <!-- Container with each space with data -->
+                        <div
+                            class="data-container"
                         >
-                            <strong>Taxa de Remoção: </strong>{{ins_pam[1].metalRemotionRate.toFixed(2)}} cm3/min
-                        </span>
+                                <!-- Data description with the Condition -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Condição: </strong>{{ins_pam[0].condition}}
+                                </span>
+
+                                <!-- Data description with the Material -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Material: </strong>{{ins_pam[0].material}}
+                                </span>
+
+                                <!-- Data description with the Iso -->
+                                <span
+                                    class="data-description"
+                                >
+                                    <strong>Uso: </strong>{{ins_pam[0].machine}}®
+                                </span>
+                        </div>
+                        
+                        <!-- Container with each space with data -->
+                        <div
+                            class="data-container"
+                        >
+                            <!-- Data description with the RPM -->
+                            <span
+                                class="data-description"
+                            >
+                                <strong>RPM: </strong>{{ins_pam[1].rpm.toFixed(2)}} r/min
+                            </span>
+
+                            <!-- Data description with the Machining Time -->
+                            <span
+                                class="data-description"
+                            >
+                                <strong>Tempo de Usinagem: </strong>{{ins_pam[1].machiningTime.toFixed(2)}} min
+                            </span>
+
+                            <!-- Data description with the Metal Remotion Rate -->
+                            <span
+                                class="data-description"
+                            >
+                                <strong>Taxa de Remoção: </strong>{{ins_pam[1].metalRemotionRate.toFixed(2)}} cm3/min
+                            </span>
+                        </div>
+
                     </div>
+
                 </div>
             }
                         

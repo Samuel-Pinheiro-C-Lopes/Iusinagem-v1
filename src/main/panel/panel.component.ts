@@ -21,4 +21,7 @@ export class PanelComponent {
   */
   @Input() geometry!:geometry
 
+  getInsertImg(iso:string):string {
+    return `./assets/insertsImgs/${iso.charAt(0)}.png`;
+  }
 }
