@@ -149,34 +149,34 @@ external:insert[] = [
       //boas condições********
       {
         iso: "CNMG 12 04 04", geometry: "SF", class: 1105, vc: 80, fn: 0.12, ap: 0.40, 
-        material: "k", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+        material: "s", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
       },
 
       {
         iso: "DNMG 15 06 04", geometry: "SF", class: 1105, vc: 80, fn: 0.12, ap: 0.40, 
-        material: "k", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
+        material: "s", condition: "Boa", operation: 'Acabamento', machine: "T-Max"
       },
 
       //médias condições********
       {
         iso: "CNMG 12 04 04", geometry: "SF", class: 1115, vc: 65, fn: 0.12, ap: 0.40, 
-        material: "k", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+        material: "s", condition: "Media", operation: 'Acabamento', machine: "T-Max"
       },
 
       {
         iso: "DNMG 15 06 04", geometry: "SF", class: 1115, vc: 65, fn: 0.12, ap: 0.40, 
-        material: "k", condition: "Media", operation: 'Acabamento', machine: "T-Max"
+        material: "s", condition: "Media", operation: 'Acabamento', machine: "T-Max"
       },
 
       //difíceis condições********
       {
         iso: "CNMG 12 04 04", geometry: "SF", class: 1125, vc: 35, fn: 0.12, ap: 0.40, 
-        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+        material: "s", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
       },
 
       {
         iso: "DNMG 15 06 04", geometry: "SF", class: 1125, vc: 35, fn: 0.12, ap: 0.40, 
-        material: "k", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
+        material: "s", condition: "Dificil", operation: 'Acabamento', machine: "T-Max"
       },
 
     //OPERAÇÕES MÉDIAS*****
@@ -216,7 +216,7 @@ external:insert[] = [
         material: "p", condition: "Dificil", operation: 'Media', machine: "T-Max"
       },
     
-    //Aço Inoxidável****
+     //Aço Inoxidável****
 
       //boas condições********
       {
@@ -251,7 +251,7 @@ external:insert[] = [
         material: "m", condition: "Dificil", operation: 'Media', machine: "T-Max"
       },
 
-    //Ferro fundido******
+     //Ferro fundido******
 
       //boas condições******
       {
@@ -286,20 +286,181 @@ external:insert[] = [
         material: "k", condition: "Dificil", operation: 'Media', machine: "T-Max"
       },
 
-    //Superliga******
+     //Superliga******
 
       //boas condições********
       {
-        iso: "CNMG 12 04 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 3.00, 
-        material: "k", condition: "Boa", operation: 'Media', machine: "T-Max"
+        iso: "CNMG 12 04 04", geometry: "SM", class: 1105, vc: 70, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Boa", operation: 'Media', machine: "T-Max"
       },
 
       {
-        iso: "DNMG 15 06 08", geometry: "KM", class: 3210, vc: 280, fn: 0.35, ap: 2.50, 
-        material: "k", condition: "Boa", operation: 'Media', machine: "T-Max"
+        iso: "DNMG 15 06 04", geometry: "SM", class: 1105, vc: 70, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Boa", operation: 'Media', machine: "T-Max"
+      },
+
+      //médias condições*****
+      {
+        iso: "CNMG 12 04 04", geometry: "SM", class: 1115, vc: 55, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "SM", class: 1115, vc: 55, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Media", operation: 'Media', machine: "T-Max"
+      },
+
+      //difíceis condições*****
+      {
+        iso: "CNMG 12 04 04", geometry: "SM", class: 1125, vc: 32, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 04", geometry: "SM", class: 1125, vc: 32, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Dificil", operation: 'Media', machine: "T-Max"
+      },
+    
+    //OPERAÇÕES DE DESBASTE*****
+
+     //Aço************
+      
+      //boas condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "PR", class: 4315, vc: 405, fn: 0.35, ap: 4.00, 
+        material: "p", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "PR", class: 4315, vc: 405, fn: 0.35, ap: 4.00, 
+        material: "p", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      },
+
+      //médias condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "PR", class: 4325, vc: 335, fn: 0.35, ap: 4.00, 
+        material: "p", condition: "Media", operation: 'Desbaste', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "PR", class: 4325, vc: 335, fn: 0.35, ap: 4.00, 
+        material: "p", condition: "Media", operation: 'Desbaste', machine: "T-Max"
+      },
+
+      //difíceis condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "PR", class: 4335, vc: 200, fn: 0.35, ap: 4.00, 
+        material: "p", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      },
+
+      {
+        iso: "DNMG 15 06 08", geometry: "PR", class: 4335, vc: 200, fn: 0.40, ap: 4.00, 
+        material: "p", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      },
+
+     //Aço Inoxidável************
+      
+      //boas condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "MR", class: 2220, vc: 195, fn: 0.30, ap: 3.00, 
+        material: "m", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+      {
+        iso: "DNMG 15 06 08", geometry: "MR", class: 2220, vc: 195, fn: 0.30, ap: 3.00, 
+        material: "m", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      },
+
+      //médias condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "MR", class: 2025, vc: 165, fn: 0.30, ap: 3.00, 
+        material: "m", condition: "Media", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+      {
+        iso: "DNMG 15 06 08", geometry: "MR", class: 2025, vc: 165, fn: 0.30, ap: 3.00, 
+        material: "m", condition: "Media", operation: 'Desbaste', machine: "T-Max"
+      },
+
+      //difíceis condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "MR", class: 2035, vc: 145, fn: 0.30, ap: 3.00, 
+        material: "m", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+      {
+        iso: "DNMG 15 06 08", geometry: "MR", class: 2035, vc: 145, fn: 0.30, ap: 3.00, 
+        material: "m", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      },
+
+     //Ferro Fundido************
+      
+      //boas condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "KR", class: 3210, vc: 275, fn: 0.38, ap: 3.50, 
+        material: "k", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+      {
+        iso: "DNMG 15 06 08", geometry: "KR", class: 3210, vc: 285, fn: 0.34, ap: 3.50, 
+        material: "k", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+      //médias condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "KR", class: 3210, vc: 275, fn: 0.38, ap: 3.50, 
+        material: "k", condition: "Media", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+      {
+        iso: "DNMG 15 06 08", geometry: "KR", class: 3210, vc: 285, fn: 0.34, ap: 3.50, 
+        material: "k", condition: "Media", operation: 'Desbaste', machine: "T-Max"
       },
       
+      //difíceis condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "KR", class: 3225, vc: 185, fn: 0.38, ap: 3.50, 
+        material: "k", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+      {
+        iso: "DNMG 15 06 08", geometry: "KR", class: 3225, vc: 195, fn: 0.34, ap: 3.50, 
+        material: "k", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      }, 
+
+     //superliga************
       
+      //boas condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "SMR", class: 1105, vc: 50, fn: 0.30, ap: 2.00, 
+        material: "s", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      }, 
+      {
+        iso: "DNMG 15 06 08", geometry: "SMR", class: 1105, vc: 70, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Boa", operation: 'Desbaste', machine: "T-Max"
+      },   
+
+      //médias condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "SMR", class: 1115, vc: 40, fn: 0.30, ap: 2.00, 
+        material: "s", condition: "Media", operation: 'Desbaste', machine: "T-Max"
+      }, 
+      {
+        iso: "DNMG 15 06 08", geometry: "SMR", class: 1115, vc: 55, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Media", operation: 'Desbaste', machine: "T-Max"
+      },   
+
+      //difíceis condições******
+      {
+        iso: "CNMG 12 04 08", geometry: "SMR", class: 1125, vc: 25, fn: 0.30, ap: 2.00, 
+        material: "s", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      }, 
+      {
+        iso: "DNMG 15 06 08", geometry: "SMR", class: 1125, vc: 32, fn: 0.20, ap: 1.50, 
+        material: "s", condition: "Dificil", operation: 'Desbaste', machine: "T-Max"
+      },   
+
+    
       
 ];
 

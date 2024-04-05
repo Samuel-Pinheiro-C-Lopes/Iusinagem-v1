@@ -1,12 +1,21 @@
-.insert-description {
-    display: flex;
-    justify-content: space-between;
+/*
+Determines the style of the panel title located
+in it's header
+It makes the title centered
+*/
+.panel-title {
+    width: 100%; 
+    display: flex; 
+    justify-content: center;
 }
 
-.insert-description p {
-    margin-right: 50px;
-}
-
+/*
+Container with display flex and nowrap
+setted in the flex-wrap property - that, by
+itself, is determined as nowrap as well -,
+meanning the children components will not wrap
+and shall occupy only one line
+*/
 .container {
     display: flex;
     flex-wrap: nowrap;
@@ -14,19 +23,44 @@
     height: fit-content;
 }
 
-.insert-container {
+/*
+Data container that determines
+how the data description classed
+elements will behave inside it
+It has a width and margin, and the
+children component will wrap and
+be displayed as flex, occupying the 
+space equally without wrapping
+*/
+.data-container {
     display: flex;
     flex-wrap: wrap;
-    width: 30%;
     margin-bottom: 15px;
 }
 
-.insert-description {
+/*
+Data description that determines
+the padding and font color
+*/
+.data-description {
     padding: 5px;
-    color: red;
+    color: rgb(56, 56, 56);
 }
 
+/*
+Each iteration has a limited height and
+overflow-y so that the user can navigate
+each data container that goes beyond
+the determined height
+*/
 .iteration {
     height: 150px;
     overflow-y: auto;
+}
+
+/*
+h5 margin 
+*/
+h5 {
+    margin: 2px;
 }

@@ -1,10 +1,25 @@
 <p>
+    <!-- 
+        Each category will be displayed as a tab that, within, will have a app-panel component 
+        for each geometry, displaying info like the parameters of the machining with each insert
+        and it's configurations - like vc, fn and ap, for example
+    -->
     <mat-tab-group>
+        <!-- iterates each category inputed in the data -->
         @for (category of tabData; track tabData; let idx = $index) {
             <mat-tab>
+                <!--
+                    uses the type of the first geometry of the category - that will be the same as the others - to
+                    label the tab - as external or internal, for example
+                -->
                 <ng-template mat-tab-label>
                     {{category[0].type}}
                 </ng-template>
+
+                <!--
+                    iterates each geometry, passing it to a children app-panel component
+                    empowered by the mat expansion module of Angular Material
+                -->
                 @for (geometry of category; 
                 track tabData) {
                     <app-panel [geometry] = "geometry"></app-panel>

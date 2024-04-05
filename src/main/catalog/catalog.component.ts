@@ -13,14 +13,22 @@ import { insert } from '../main.component';
 })
 export class CatalogComponent implements OnInit {
 
+  //the insert array data inputed by a parent component
   @Input() data!:insert[];
 
+  //columns displayed in the table
   displayedColumns: string[] = [
     'iso', 'geometry', 'class', 'vc', 'fn', 'ap', 
     'material', 'condition', 'machine'
   ];
-  dataSource!:insert[];
 
+  /*
+    Since the table takes the dataSource once and needs to reload after the component
+    starts or after some event is triggered, only initializating it's attribute
+    with the inputed data doesn't work since it takes the data before it's inputed,
+    hence the attribution in the ngOnInit implemented on this component
+  */
+  dataSource!:insert[];
   ngOnInit() {
     this.dataSource = this.data;
   }

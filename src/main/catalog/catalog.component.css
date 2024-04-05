@@ -1,22 +1,7 @@
+/*
+  table tag stylized to occupy all of it's parent width and have margin in the bottom and top
+*/
 table {
     width: 100%;
     margin: 50px 0 50px 0;
 }
-
-@media(max-width: 600px) {
-    .mobile-label {
-      width: 80px;
-      display: inline-block;
-          font-weight: bold;
-    }
-  
-    .mat-header-row {
-      display: none;
-    }
-  
-    .mat-row { 
-      flex-direction: column;
-      align-items: start;
-      padding: 8px 24px;
-    }
-  }

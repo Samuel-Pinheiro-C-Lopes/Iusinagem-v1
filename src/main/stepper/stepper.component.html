@@ -1,5 +1,14 @@
 <p>
-    <!-- Mat Stepper component -->
+    <!-- 
+        Mat Stepper component 
+        Is setted as linear, which obligates the user
+        to only advance in the stepper once
+        and previous step is clicked
+        Has a selectionChange() event that updates
+        the data of the processConfig
+        The [orientation] property changes based 
+        on the Media screen of the user
+    --> 
     <mat-stepper
         #stepper
         [linear] = 'true'
@@ -344,7 +353,12 @@
             </div>
         </mat-step>
 
+        <!--
+            Final step, in which the user will receive the inserts and
+            parameters accordingly to the filtered inserts
+        -->
         <mat-step>
+            <!-- Title of the step since it's tagged as 'matStepLabel' -->
             <ng-template matStepLabel>Obtenção de parâmetros</ng-template>
 
             <mat-divider></mat-divider>
@@ -371,6 +385,14 @@
                 checkGeometries(process_config.productsInternalGeometry)))
             )
             {
+                <!--
+                    Once the values inputed by the user are valid, in the
+                    final stap the tabs will appear with inputed value of the arrays
+                    merged with the tabDataCreator() function
+                    It takes all the disponible data from the process_config
+                    that contains geometries and eliminates the ones tha aren't
+                    filled
+                -->
                 <app-tabs
                     [tabData] = "tabDataCreator(process_config.productsExternalGeometry, 
                     process_config.productsInternalGeometry)"
@@ -385,25 +407,3 @@
 
     </mat-stepper>
 </p>
-
-<!-- 
-    The problem may be with the lack of a button to call the function once the variable changes 
-    
-    1# criar botão que altera o valor da variável capturada pela directiva @for das pastilhas
-    filtradas e seus parâmetros
-
-    2# O elemento dentro da primeira iteração receberá a geometria que, em seu interior, será tratada
-    e utilizada em função do método de filtro e calcular.
-
-    3# dentro desse elemento, usar insertFiltrateThenCalculate com a geometria do for pai, o process
-    config e o tipo de pastilha - externo ou interno - desejado
-
-    4# uma vez que isso seja efetuado, bastará clicar no botão novamente para recarregar o resultado
-
--->
-<!-- 
-    1- Para cada geometria - é um array, vai ocorrer algo a cada objeto 
-    2 - FaCArray é algo como: 
-    [ [ [ins, pam], [ins, pam] ... [ins, pam] ], [ [ins, pam], [ins, pam], ... [ins, pam] ], ... [ [ins, pam], [ins, pam], ... [ins, pam] ] ]
---> 
-

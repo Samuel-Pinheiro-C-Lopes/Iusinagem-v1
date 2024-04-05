@@ -2,9 +2,12 @@
     class="main"
 >
     <h1>Main</h1>
+    <!-- First Catalog component, with the internal insert data -->
     <app-catalog [data] = "internal"></app-catalog>
     <mat-divider></mat-divider>
+    <!-- Second Catalog component, with the external insert data -->
     <app-catalog [data] = "external"></app-catalog>
     <mat-divider></mat-divider>
+    <!-- Mat Stepper component, with all the insert data meant to be treated base on the users inputs -->
     <app-stepper [externalInsertData] = "external" [internalInsertData] = "internal"></app-stepper>
 </div>

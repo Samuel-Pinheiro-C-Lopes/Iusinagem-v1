@@ -11,5 +11,11 @@ import { PanelComponent } from '../panel/panel.component';
   styleUrl: './tabs.component.css'
 })
 export class TabsComponent {
+  /*
+    It receives from the parent component an array of arrays of geometries
+    being each one a category (like external, internal, or others) and, inside each one
+    a array of geometries for that category. The data contains the start, end, diameter and
+    the already filtred and calculated inserts and parameters
+  */
   @Input() tabData!:geometry[][]
 }
