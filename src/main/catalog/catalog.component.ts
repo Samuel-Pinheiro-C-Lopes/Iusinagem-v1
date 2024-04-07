@@ -63,6 +63,12 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource<insertImg>(data1);
   }
 
+
+  /*
+    The paginator property is updated based on the callback méthod focused in 
+    the MatPaginator setted, making it changes whenever the user interacts with
+    the structure 
+  */
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }

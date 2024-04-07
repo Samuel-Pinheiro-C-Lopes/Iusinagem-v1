@@ -226,14 +226,183 @@ export class StepperComponent {
   a single geometry with the determined conditions
   It's used in the @if block of the final step to assure the data inputed is correct
   */
-  checkGeometries(geometry?:{start?: number, end?: number, diameter?: number}[]) {
-    return geometry?.filter((el) => {
-      return (
-          (el.start || el.start === 0) && (el.end || el.end === 0) && el.diameter
-          && el.diameter > 0 && el.start != el.end && el.start >= 0 && el.end >= 0
-        );
-    }).length; 
+  geometriesValid:[string[], boolean] = [[], false];
+
+  checkGeometries(...geometries:geometry[][]):number {
+    //console.log("CHECKGEOMETRIS CALLED !!!!")
+    const booleanArr:boolean[] = [
+
+    ];
+
+    const errorMsgs:string[] = [
+
+    ];
+
+    geometries.forEach((geArr) => {
+
+      const booleanArr0:boolean[] = [
+
+      ];
+
+      //console.log('GEOMETRY ARRAY: ', geArr)
+
+      geArr.forEach((ge, idx) => {
+        if 
+          (
+              ge.start >= 0 && ge.end > 0 &&
+              ge.start < ge.end && ge.diameter >= 0 &&
+              ge.diameter <= this.process_config.preDiameter &&
+              ge.end <= this.process_config.preLength &&
+              (!geArr[idx - 1] || ge.start >= geArr[idx-1].end) &&
+              (ge.start != 0 || ge.end != 0 || ge.diameter != 0)
+          )
+        {
+          //console.log('Geometry is true when', idx, ': ', ge);
+          booleanArr0.push(true);
+        }
+        else
+        {
+          if (ge.start == 0 && ge.end == 0 && ge.diameter == 0) 
+          {
+            errorMsgs.push(`Em ${ge.type} o trecho ${idx} está vazio.`)
+          }
+          else if (geArr.length != 0) 
+          {  
+            if (ge.start <= 0) { errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é menor ou igual a 0.`); }
+            if (ge.end <= 0) { errorMsgs.push(`Em ${ge.type} o final ${ge.end}mm é menor ou igual a 0.`); }
+            if (ge.start > ge.end) { errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é maior que o final ${ge.end}mm.`); }
+            if (ge.diameter > this.process_config.preDiameter) { errorMsgs.push(`Em ${ge.type} o diâmetro ${ge.diameter}mm é maior que o diâmetro pré-usinagem ${this.process_config.preDiameter}mm.`); }
+            if (ge.end > this.process_config.preLength) { errorMsgs.push(`Em ${ge.type} o final ${ge?.end}mm é maior que o comprimento pré-usinagem ${this.process_config.preLength}mm.`); }
+            if (geArr[idx-1]) {
+              if (ge.start < geArr[idx-1].end) { errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é maior que o final ${ge.end}mm de seu trecho antecessor.`) }
+            }
+          }
+        console.log('Geometry is false when', idx, ': ', ge);
+        booleanArr0.push(false);
+        }
+      });
+      
+      if 
+        (
+          booleanArr0.every(bl => bl == true) || geArr.length === 0
+        )
+      {
+        //console.log('GEOMETRY ARRAY IS TRUE WHEN: ', geArr);
+        booleanArr.push(true);
+      }
+      else
+      {
+        //console.log('GEOMETRY ARRAY IS FALSE WHEN: ', geArr);
+        booleanArr.push(false);
+      }
+
+    });
+    
+    if 
+      (
+        booleanArr.every(bl => bl == true) && 
+        geometries.some(geArr => geArr.length != 0) && 
+        this.checkDiameters(this.process_config.productsExternalGeometry, this.process_config.productsInternalGeometry)
+      ) 
+    { 
+      this.geometriesValid[1] = true; 
+      //console.log("ALL TRUE, HEHE") 
+      return 1;
+    }
+    else 
+    { 
+      this.geometriesValid[1] = false;
+        errorMsgs.forEach((err) => {
+          this.geometriesValid[0].push(err);
+        })
+      //console.log("ALL FALSEEEE, HEHE") 
+      return 0;
+    }
   }
+
+  /*
+  checks if each geometry is filled or if the external
+  geometry is higher than the internal
+  It's called by the checkGeometries function
+  */
+
+  /*
+        if 
+        (
+          !(booleanArr.every(bl => bl == true) && 
+          geometries.some(geArr => geArr.length != 0))
+        )
+      {
+
+  0-30 40 [30, 40]
+  30-70 50 [70, 50]
+  0-20 20 [20, 20]
+  20-50 [50, 45]
+  1- inicio que antecede esse começo
+  2- fim que sucede o final 
+  3 - comparar o diâmetro interno e os diâmetros contidos nesse trecho
+
+  
+  checkDiameters(external:geometry[], internal:geometry[]):boolean {
+    const diameterMeasurementsExt:number[] = [
+
+    ];
+    const diameterMeasurementsInt:number[] = [
+
+    ];
+
+    let valid:boolean = true;
+
+    external.forEach((el) => {
+      diameterMeasurementsExt.push(el.diameter);
+    });
+    internal.forEach((el) => {
+      diameterMeasurementsInt.push(el.diameter);
+    });
+
+    diameterMeasurementsExt.forEach((el, idx) => {
+      if(el > diameterMeasurementsInt[idx] || !diameterMeasurementsInt[idx]) 
+      {
+        return 1;
+      }
+      else
+      {
+        valid = false;
+        return 0;
+      }
+    })
+
+    return valid;
+  }
+*/
+
+  checkDiameters(external:geometry[], internal:geometry[]):boolean {
+    let valid:boolean = true;
+    const errMsgs:string[] = [
+
+    ]
+
+    internal.forEach((geoInt) => {
+
+      external.filter((geoExt) => {
+
+        return (geoExt.start <= geoInt.start && geoExt.end > geoInt.start) || (geoExt.end > geoInt.start && geoExt.start < geoInt.end);
+
+      }).forEach((geo) => {
+
+        if (geo.diameter <= geoInt.diameter) {
+          errMsgs.push(`O diâmetro ${geo.diameter}mm do trecho ${geo.start}mm - ${geo.end}mm do ${geo.type} é menor ou igual ao diâmetro ${geoInt.diameter} do trecho ${geoInt.start}mm - ${geoInt.end}mm do ${geoInt.type}`);
+          valid = false;
+        }
+        
+      })
+    })
+    errMsgs.forEach((err) => {
+      this.geometriesValid[0].push(err);
+    });
+    return valid;
+  }
+
 
 //INSERT AND PARAMETERS DATA TREATMENT BELLOW
 
@@ -368,7 +537,7 @@ export class StepperComponent {
   each time the user changes something, being called by the selectionChange()
   function along side with the fillGeometriesInsertsAndParameters()
   */
-  unfillGeometriesInsertsAndParameters() {
+  unfillGeometriesInsertsAndParameters():void {
     this.process_config.productsExternalGeometry.map((geometry) => {
       geometry.insertsAndParameters = undefined;
     });
@@ -384,8 +553,11 @@ export class StepperComponent {
   be outputed in the final step is updated
   */
   selectionChange() {
+    this.geometriesValid[0].splice(0, this.geometriesValid[0].length);
+    this.tabDataCreator(this.process_config.productsExternalGeometry, this.process_config.productsInternalGeometry);
     this.unfillGeometriesInsertsAndParameters();
     this.fillGeometriesInsertsAndParameters();
+    this.checkGeometries(this.process_config.productsExternalGeometry, this.process_config.productsInternalGeometry);
   }
 
 
@@ -395,12 +567,17 @@ export class StepperComponent {
   filtrating them - eliminating the ones that aren't valid - has no length,
   no inserts and parameters and end equal to zero
   */
+  tabData:geometry[][] = [
+
+  ];
+
   tabDataCreator(...geometriesArr: geometry[][]):geometry[][] {
     const filteredArr = geometriesArr.filter((el) => {
       return el.filter((el) => {
         el.end != 0 &&  el.insertsAndParameters
       }) && el.length;
     })
+    this.tabData = filteredArr;
     return filteredArr;
   };
 

@@ -73,3 +73,32 @@ The font-size increases, incresing it's size
     font-size: 25px;
 }
 
+/*
+
+*/
+.err-content {
+    display: flex;
+    flex-wrap: wrap;
+    height: 300px;
+    overflow-y: auto;
+}
+
+/*
+
+*/
+.err-msg {
+    color: red;
+    text-align: center;
+    width: 100%;
+    text-decoration: underline;
+    transition: 0.4s all;
+}
+
+.err-msg:hover {
+    font-size: larger;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}

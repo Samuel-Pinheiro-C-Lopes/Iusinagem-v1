@@ -370,20 +370,7 @@
                 are true, the user can see the data and, if it isn't, and error message
                 appears in the else directive
             -->
-            @if
-            (
-                (process_config.preLength && process_config.preDiameter 
-                && process_config.condition && process_config.material && 
-                (process_config.productsExternalGeometry.length || 
-                process_config.productsInternalGeometry.length)) 
-                &&
-                ((checkGeometries(process_config.productsExternalGeometry) && 
-                !process_config.productsInternalGeometry.length) ||
-                (checkGeometries(process_config.productsInternalGeometry) && 
-                !process_config.productsExternalGeometry.length) ||
-                (checkGeometries(process_config.productsExternalGeometry) &&
-                checkGeometries(process_config.productsInternalGeometry)))
-            )
+            @if (geometriesValid[1] && process_config.condition && process_config.material && process_config.preDiameter && process_config.preLength)
             {
                 <!--
                     Once the values inputed by the user are valid, in the
@@ -394,14 +381,24 @@
                     filled
                 -->
                 <app-tabs
-                    [tabData] = "tabDataCreator(process_config.productsExternalGeometry, 
-                    process_config.productsInternalGeometry)"
+                    [tabData] = "tabData"
                 ></app-tabs>
             }
             @else {
                 <h2>
                     Por favor, preencha todos os campos necessários com valores válidos.
                 </h2>
+                <div>
+                
+                    <div
+                        class="err-content"
+                    >
+                        @for (err of geometriesValid[0]; track geometriesValid[0]) {
+                            <h3 class="err-msg">{{err}}</h3>
+                        }
+                    </div>
+                
+                </div>
             }
         </mat-step>
 
