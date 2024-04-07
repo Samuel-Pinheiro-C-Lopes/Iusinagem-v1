@@ -98,19 +98,13 @@ export class StepperComponent {
   drills, and then, accordingly, determine all the variables within the calculations needed
   */
   public process_config:process = {
-    element: 'flange',
-    preLength: 300,
-    preDiameter: 200,
-    condition: 'difícil',
-    material: 'aço',
+    element: '',
+    preLength: 0,
+    preDiameter: 0,
+    condition: '',
+    material: '',
     productsExternalGeometry: [
-      {
-        start: 0, end: 10, diameter: 20, type: 'externo'
-      },
-  
-      {
-        start: 10, end: 30, diameter: 40, type: 'externo'
-      },
+
     ],
     productsInternalGeometry: [
 
