@@ -41,7 +41,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   //columns displayed in the table
   displayedColumns: string[] = [
     'forma', 'iso', 'geometry', 'class', 'vc', 'fn', 'ap', 
-    'material', 'condition', 'machine'
+    'material', 'condition', 'operation', 'machine'
   ];
 
   /*

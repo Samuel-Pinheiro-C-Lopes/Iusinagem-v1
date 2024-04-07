@@ -3,6 +3,7 @@ Style for all the toolbars present in this component, since all of them will rec
 */
 .toolbar {
     color: white;
+    width: 100%;
 }
 
 /*
@@ -29,8 +30,11 @@ padding bottom determines the distance between the bottom border of the element 
 */
 .toolbar.t2 {
     background: linear-gradient(180deg, rgb(1, 150, 1) , rgb(1, 180, 1));
-    height: 40px;
-    padding: 10px 5% 10px 5%;
+    height: 65px;
+    padding: 10px 5% 30px 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 /*
@@ -38,18 +42,48 @@ All the text within the elements with toolbar class and t2 will have the determi
 Font-size determines the size of the font
 padding determines a space within the element between it's borders and content, as: x y z w; x = top, y = right, z = bottom and w = left.
 */
-.toolbar.t2 .link .text {
-    font-size: small;
-    padding: 0 5px 0px 5px;
-    position: relative;
-    top: -5px;
+.toolbar.t2 .link {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 /*
 Way to prevent the default css for the a tag, both the a tag color and text-decoration were removed
 */
 a {
+    font-size: medium;
     cursor: pointer;
     color: white;
     text-decoration: none;
+    transition: all 1s;
 }
+
+a:hover {
+    font-size: large;
+}
+
+mat-icon {
+    transition: all 1s;
+    width: fit-content ;
+    height: fit-content;
+}
+
+a:hover mat-icon {
+    font-size: 30px;
+}
+
+a mat-icon {
+    margin-right: 10px;
+}
+
+h1  {
+    transition: all 1s;
+    cursor: default;
+}
+
+h1:hover {
+    font-size: larger;
+}
+

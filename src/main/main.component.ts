@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
 import { MatDivider } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 
 import { StepperComponent } from './stepper/stepper.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { CarouselComponent } from './carousel/carousel.component';
+import { MatTooltip } from '@angular/material/tooltip';
 
 /*
 data type for the inserts arrays that will be treated by the application
@@ -28,7 +29,7 @@ export interface insert {
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [StepperComponent, CatalogComponent, MatDivider, CarouselComponent],
+  imports: [StepperComponent, CatalogComponent, MatDivider, MatIconModule, MatTooltip],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })

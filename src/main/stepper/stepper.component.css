@@ -79,7 +79,7 @@ The font-size increases, incresing it's size
 .err-content {
     display: flex;
     flex-wrap: wrap;
-    height: 300px;
+    height: fit-content;
     overflow-y: auto;
 }
 
@@ -92,6 +92,7 @@ The font-size increases, incresing it's size
     width: 100%;
     text-decoration: underline;
     transition: 0.4s all;
+    height: 85px;
 }
 
 .err-msg:hover {
