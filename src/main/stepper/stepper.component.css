@@ -73,9 +73,6 @@ The font-size increases, incresing it's size
     font-size: 25px;
 }
 
-/*
-
-*/
 .err-content {
     display: flex;
     flex-wrap: wrap;
@@ -83,9 +80,6 @@ The font-size increases, incresing it's size
     overflow-y: auto;
 }
 
-/*
-
-*/
 .err-msg {
     color: red;
     text-align: center;

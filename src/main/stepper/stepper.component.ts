@@ -223,22 +223,11 @@ export class StepperComponent {
   geometriesValid:[string[], boolean] = [[], false];
 
   checkGeometries(...geometries:geometry[][]):number {
-    //console.log("CHECKGEOMETRIS CALLED !!!!")
-    const booleanArr:boolean[] = [
-
-    ];
-
-    const errorMsgs:string[] = [
-
-    ];
+    const booleanArr:boolean[] = [  ];
+    const errorMsgs:string[] = [  ];
 
     geometries.forEach((geArr) => {
-
-      const booleanArr0:boolean[] = [
-
-      ];
-
-      //console.log('GEOMETRY ARRAY: ', geArr)
+      const booleanArr0:boolean[] = [  ];
 
       geArr.forEach((ge, idx) => {
         if 
@@ -251,7 +240,6 @@ export class StepperComponent {
               (ge.start != 0 || ge.end != 0 || ge.diameter != 0)
           )
         {
-          //console.log('Geometry is true when', idx, ': ', ge);
           booleanArr0.push(true);
         }
         else
@@ -262,16 +250,30 @@ export class StepperComponent {
           }
           else if (geArr.length != 0) 
           {  
-            if (ge.start <= 0) { errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é menor ou igual a 0.`); }
-            if (ge.end <= 0) { errorMsgs.push(`Em ${ge.type} o final ${ge.end}mm é menor ou igual a 0.`); }
-            if (ge.start > ge.end) { errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é maior que o final ${ge.end}mm.`); }
-            if (ge.diameter > this.process_config.preDiameter) { errorMsgs.push(`Em ${ge.type} o diâmetro ${ge.diameter}mm é maior que o diâmetro pré-usinagem ${this.process_config.preDiameter}mm.`); }
-            if (ge.end > this.process_config.preLength) { errorMsgs.push(`Em ${ge.type} o final ${ge?.end}mm é maior que o comprimento pré-usinagem ${this.process_config.preLength}mm.`); }
+            if (ge.start < 0) { 
+              errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é menor que 0.`); 
+            }
+            if (ge.end <= 0) { 
+              errorMsgs.push(`Em ${ge.type} o final ${ge.end}mm é menor ou igual a 0.`); 
+            }
+            if (ge.start > ge.end) { 
+              errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é maior que o final ${ge.end}mm.`); 
+            }
+            if (ge.diameter > this.process_config.preDiameter) { 
+              errorMsgs.push(`Em ${ge.type} o diâmetro ${ge.diameter}mm é maior que o 
+              diâmetro pré-usinagem ${this.process_config.preDiameter}mm.`); 
+            }
+            if (ge.end > this.process_config.preLength) { 
+              errorMsgs.push(`Em ${ge.type} o final ${ge?.end}mm é maior que o 
+              comprimento pré-usinagem ${this.process_config.preLength}mm.`); 
+          }
             if (geArr[idx-1]) {
-              if (ge.start < geArr[idx-1].end) { errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é maior que o final ${ge.end}mm de seu trecho antecessor.`) }
+              if (ge.start < geArr[idx-1].end) { 
+                errorMsgs.push(`Em ${ge.type} o início ${ge.start}mm é maior que o 
+                final ${ge.end}mm de seu trecho antecessor.`) 
+              }
             }
           }
-        console.log('Geometry is false when', idx, ': ', ge);
         booleanArr0.push(false);
         }
       });
@@ -281,17 +283,14 @@ export class StepperComponent {
           booleanArr0.every(bl => bl == true) || geArr.length === 0
         )
       {
-        //console.log('GEOMETRY ARRAY IS TRUE WHEN: ', geArr);
         booleanArr.push(true);
       }
       else
       {
-        //console.log('GEOMETRY ARRAY IS FALSE WHEN: ', geArr);
         booleanArr.push(false);
       }
 
     });
-    
     if 
       (
         booleanArr.every(bl => bl == true) && 
@@ -300,7 +299,6 @@ export class StepperComponent {
       ) 
     { 
       this.geometriesValid[1] = true; 
-      //console.log("ALL TRUE, HEHE") 
       return 1;
     }
     else 
@@ -309,7 +307,6 @@ export class StepperComponent {
         errorMsgs.forEach((err) => {
           this.geometriesValid[0].push(err);
         })
-      //console.log("ALL FALSEEEE, HEHE") 
       return 0;
     }
   }
@@ -380,12 +377,16 @@ export class StepperComponent {
 
       external.filter((geoExt) => {
 
-        return (geoExt.start <= geoInt.start && geoExt.end > geoInt.start) || (geoExt.end > geoInt.start && geoExt.start < geoInt.end);
+        return (geoExt.start <= geoInt.start && geoExt.end > geoInt.start) 
+        || (geoExt.end > geoInt.start && geoExt.start < geoInt.end);
 
       }).forEach((geo) => {
 
         if (geo.diameter <= geoInt.diameter) {
-          errMsgs.push(`O diâmetro ${geo.diameter}mm do trecho ${geo.start}mm - ${geo.end}mm do ${geo.type} é menor ou igual ao diâmetro ${geoInt.diameter} do trecho ${geoInt.start}mm - ${geoInt.end}mm do ${geoInt.type}`);
+          errMsgs.push(
+            `O diâmetro ${geo.diameter}mm do trecho ${geo.start}mm - ${geo.end}mm 
+            do ${geo.type} é menor ou igual ao diâmetro ${geoInt.diameter} 
+            do trecho ${geoInt.start}mm - ${geoInt.end}mm do ${geoInt.type}`);
           valid = false;
         }
         
